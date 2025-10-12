@@ -1,0 +1,18 @@
+# Ignore sensitive files
+.env
+app/config/config.php
+
+# Ignore uploads and cache
+public/uploads/
+tmp/
+cache/
+
+# Ignore system/vendor folders
+/vendor/
+node_modules/
+
+# Ignore IDE/editor files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
