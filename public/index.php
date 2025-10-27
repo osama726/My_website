@@ -1,5 +1,19 @@
 <?php
     // public/index.php
+    require_once __DIR__ . '/../app/config/config.php';
+
+    function render404($message = null) {
+        // require_once __DIR__ . '/../app/config/config.php';
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
+
+        // نحدد مسار view الخطأ
+        $viewPath = __DIR__ . '/../app/views/errors/404.php';
+
+        require __DIR__ . '/../app/views/layouts/main.php';
+        exit;
+    }
 
     // نجيب الـ controller و الـ action من الـ URL
     $controller = $_GET['controller'] ?? 'home';
@@ -23,11 +37,11 @@
             if (method_exists($controllerObject, $action)) {
                 $controllerObject->$action();
             } else {
-                echo "Action '$action' not found in controller '$controllerName'";
+                render404("Action '$action' not found in controller '$controllerName'");
             }
         } else {
-            echo "Controller class '$controllerName' not found.";
+            render404("Controller class '$controllerName' not found.");
         }
     } else {
-        echo "Controller file '$controllerFile' not found.";
+        render404("Controller file not found: $controllerFile");
     }

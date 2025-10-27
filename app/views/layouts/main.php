@@ -1,6 +1,6 @@
 <!-- app/views/layouts/main.php -->
 <?php
-    require_once __DIR__ . '/../../config/config.php';
+    // require_once __DIR__ . '/../../config/config.php';
 
     // بداية الصفحة نبدأ الجلسة لو ما كانتش بدأت
     if (session_status() == PHP_SESSION_NONE) {
@@ -15,8 +15,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title><?= $title ?? 'My Web' ?></title>
-    <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/css/style.css">
-    <!-- <link rel="stylesheet" href="/public/assets/style.css"> -->
+    <link rel="stylesheet" href="<?= BASE_URL ?>assets/css/main.css">
+    <!-- <link rel="stylesheet" href="assets/style.css"> -->
 </head>
 <body>
     <?php include 'header.php'; ?>
@@ -36,7 +36,7 @@
 
     <?php include 'footer.php'; ?>
 
-    <script src="<?= BASE_URL ?>public/assets/js/main.js"></script>
+    <script src="<?= BASE_URL ?>assets/js/main.js"></script>
 
         <!-- إمكانية تحميل سكربتات خاصة بالصفحة -->
     <?php if (!empty($pageScripts) && is_array($pageScripts)): ?>
