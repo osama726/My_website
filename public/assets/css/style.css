@@ -330,7 +330,7 @@ header .container-fluid {
         cursor: pointer;
         transition: color 0.3s;
     }
-    
+
     .navmenu {
         padding: 0;
         z-index: 9997;
@@ -395,9 +395,9 @@ header .container-fluid {
     .navmenu .active:focus {
         color: var(--nav-dropdown-hover-color);
     }
-    .navmenu a:hover{
+    .navmenu a:hover {
         margin-left: 10px;
-        transition: .4s;
+        transition: 0.4s;
     }
 
     .navmenu .active i,
@@ -420,7 +420,7 @@ header .container-fluid {
     .header .btn-log:focus:hover {
         background: color-mix(in srgb, var(--accent-color), transparent 15%);
         margin-left: 10px;
-        transition: .4s;
+        transition: 0.4s;
     }
     /* .navmenu .dropdown ul {
         position: static;
@@ -993,7 +993,6 @@ section,
     }
 }
 
-
 /*--------------------------------------------------------------
 
 
@@ -1009,12 +1008,12 @@ section,
     border-radius: 12px;
     padding: 25px 10px;
     transition: 0.3s;
-    box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
 }
 
 .skills-section .skill-box:hover {
     transform: translateY(-5px);
-    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
 }
 
 .skills-section .skill-box i {
@@ -1029,24 +1028,49 @@ section,
     font-weight: 600;
 }
 
-
-
 /*--------------------------------------------------------------
 
 /*--------------------------------------------------------------
 # Login/Register Forms
 --------------------------------------------------------------*/
-.login-section form, .register-section form {
+.login-section form,
+.register-section form {
     background: var(--surface-color);
     padding: 30px;
     border-radius: 15px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
 }
 
-.login-section label, .register-section label {
+.login-section label,
+.register-section label {
     color: var(--heading-color);
 }
 
-.login-section .btn, .register-section .btn {
+.login-section .btn,
+.register-section .btn {
     border-radius: 50px;
+}
+
+/*--------------------------------------------------------------
+
+/*--------------------------------------------------------------
+# Dashboard
+--------------------------------------------------------------*/
+.dashboard-section .card {
+    background: var(--surface-color);
+    border-radius: 15px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    transition: 0.3s;
+    color: #a15252;
+}
+.dashboard-section .card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 25px rgba(0, 0, 0, 0.2);
+}
+.dashboard-section .badge {
+    background: var(--accent-color);
+    color: var(--nav-color);
+    padding: 6px 10px;
+    border-radius: 6px;
+    font-size: 0.9rem;
 }

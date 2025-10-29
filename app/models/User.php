@@ -41,6 +41,13 @@ class User extends BaseModel {
         return $stmt->fetch();
     }
 
+    public function getRoleById($id) {
+        $stmt = $this->db->prepare("SELECT role FROM {$this->table} WHERE id = ?");
+        $stmt->execute([$id]);
+        $row = $stmt->fetch();
+        return $row ? $row['role'] : null;
+    }
+
 
     // delete user
     // public function deleteUser($id) {
