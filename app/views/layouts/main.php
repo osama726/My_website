@@ -15,8 +15,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title><?= $title ?? 'My Web' ?></title>
-    <link rel="stylesheet" href="<?= BASE_URL ?>assets/css/main.css">
-    <!-- <link rel="stylesheet" href="assets/style.css"> -->
+    <!-- Bootstrap (for grid/util classes used by the template) -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons (used by header/footer template) -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    <!-- Font Awesome-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"/>
+    <link rel="stylesheet" href="<?= BASE_URL ?>assets/css/style.css">
 </head>
 <body>
     <?php include 'header.php'; ?>
@@ -38,7 +43,7 @@
 
     <script src="<?= BASE_URL ?>assets/js/main.js"></script>
 
-        <!-- إمكانية تحميل سكربتات خاصة بالصفحة -->
+    <!-- إمكانية تحميل سكربتات خاصة بالصفحة -->
     <?php if (!empty($pageScripts) && is_array($pageScripts)): ?>
         <?php foreach ($pageScripts as $script): ?>
             <script src="<?= BASE_URL . $script ?>"></script>

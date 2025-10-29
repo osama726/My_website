@@ -5,20 +5,7 @@
 
 <!-- <p>الصفحة المطلوبة غير موجودة.</p> -->
 
-  <main class="main">
-
-    <!-- Page Title -->
-    <div class="page-title light-background">
-      <div class="container">
-        <nav class="breadcrumbs">
-          <ol>
-            <li><a href="index.html">Home</a></li>
-            <li class="current">404</li>
-          </ol>
-        </nav>
-        <h1>404</h1>
-      </div>
-    </div><!-- End Page Title -->
+  <main class="main_error">
 
     <!-- Error 404 Section -->
     <section id="error-404" class="error-404 section">
@@ -39,14 +26,14 @@
               <h2 data-aos="fade-up" data-aos-delay="400">Page Not Found</h2>
               <p data-aos="fade-up" data-aos-delay="500">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
               <div class="error-actions" data-aos="fade-up" data-aos-delay="600">
-                <a href="/" class="btn-home">
+                <a href="<?= BASE_URL ?>" class="btn-home">
                   <i class="bi bi-house-door"></i>
                   <span>Back to Home</span>
                 </a>
-                <a href="/contact" class="btn-support">
+                <!-- <a href="/contact" class="btn-support">
                   <i class="bi bi-headset"></i>
                   <span>Get Support</span>
-                </a>
+                </a> -->
               </div>
             </div>
           </div>

@@ -24,16 +24,23 @@ class User extends BaseModel {
     // }
 
     // create new user
-    public function addUser($name, $email, $password, $bio = null) {
-        $stmt = $this->db->prepare("INSERT INTO users (name, email, password, bio) VALUES (?, ?, ?, ?)");
-        return $stmt->execute([$name, $email, password_hash($password, PASSWORD_DEFAULT), $bio]);
+    public function addUser($name, $email, $password, $phone) {
+        $stmt = $this->db->prepare("INSERT INTO users (name, email, password, phone) VALUES (?, ?, ?, ?)");
+        return $stmt->execute([$name, $email, password_hash($password, PASSWORD_DEFAULT), $phone]);
     }
 
     // update user
-    public function updateUser($id, $name, $email, $bio) {
-        $stmt = $this->db->prepare("UPDATE users SET name = ?, email = ?, bio = ? WHERE id = ?");
-        return $stmt->execute([$name, $email, $bio, $id]);
+    public function updateUser($id, $name, $email, $phone) {
+        $stmt = $this->db->prepare("UPDATE users SET name = ?, email = ?, phone = ? WHERE id = ?");
+        return $stmt->execute([$name, $email, $phone, $id]);
     }
+
+    public function findByEmail($email) {
+        $stmt = $this->db->prepare("SELECT * FROM {$this->table} WHERE email = ?");
+        $stmt->execute([$email]);
+        return $stmt->fetch();
+    }
+
 
     // delete user
     // public function deleteUser($id) {
