@@ -16,8 +16,11 @@
                         <li><strong>Email:</strong> <?= htmlspecialchars($user['email']) ?></li>
                         <li><strong>Phone:</strong> <?= htmlspecialchars($user['phone'] ?? '—') ?></li>
                     </ul>
-                    <a href="<?= BASE_URL ?>?controller=user&action=logout" class="btn btn-danger btn-sm mt-3">
+                    <a href="<?= BASE_URL ?>?controller=user&action=logout" class="btn btn-danger btn-sm mt-3 mb-3">
                         Log out
+                    </a>
+                    <a href="<?= BASE_URL ?>?controller=dashboard&action=users" class="btn btn-outline-primary">
+                        Manage Users
                     </a>
                 </div>
             </div>

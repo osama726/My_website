@@ -1,4 +1,4 @@
-<section class="section skills-section">
+<section class="section skills-section" id="Skills">
     <div class="container text-center">
         <div class="section-title">
             <h2><?= htmlspecialchars($title) ?></h2>

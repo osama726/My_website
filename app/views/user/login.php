@@ -7,7 +7,7 @@
 
         <div class="row justify-content-center">
             <div class="col-md-6">
-                <form action="<?= BASE_URL ?>?controller=user&action=loginPost" method="POST" class="php-email-form">
+                <form action="<?= BASE_URL ?>?controller=user&action=loginPost" method="POST">
                     <div class="form-group mb-3">
                         <label for="email">Email</label>
                         <input type="email" name="email" required class="form-control">

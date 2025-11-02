@@ -2,46 +2,52 @@
     // public/index.php
     require_once __DIR__ . '/../app/config/config.php';
 
-    function render404($message = null) {
-        // require_once __DIR__ . '/../app/config/config.php';
+    function renderError($code = 404, $title = 'Error', $message = null) {
         if (session_status() === PHP_SESSION_NONE) {
             session_start();
         }
 
-        // نحدد مسار view الخطأ
-        $viewPath = __DIR__ . '/../app/views/errors/404.php';
+        http_response_code($code);
 
+        // نمرر البيانات إلى صفحة الخطأ الموحدة
+        $errorData = [
+            'code' => $code,
+            'title' => $title,
+            'message' => $message ?? 'An unexpected error occurred.'
+        ];
+
+        // نمرر البيانات إلى الـ layout
+        extract($errorData);
+
+        // نعرض صفحة الخطأ من خلال layout العام
+        $viewPath = __DIR__ . '/../app/views/errors/error.php';
         require __DIR__ . '/../app/views/layouts/main.php';
         exit;
     }
 
-    // نجيب الـ controller و الـ action من الـ URL
+    // جلب controller و action من الرابط
     $controller = $_GET['controller'] ?? 'home';
     $action = $_GET['action'] ?? 'index';
 
-    // نخلي الاسم الي كتبناه شبه اسم الكلاس
+    // تجهيز اسم الكلاس والمسار الكامل للملف
     $controllerName = ucfirst($controller) . 'Controller';
-
-    // نحدد المسار الكامل للملف
     $controllerFile = __DIR__ . '/../app/controllers/' . $controllerName . '.php';
 
-    // نتأكد إن الملف موجود
+    // التحقق من وجود الملف والكلاس والدالة
     if (file_exists($controllerFile)) {
         require_once $controllerFile;
 
-        // نتأكد إن الكلاس موجود
         if (class_exists($controllerName)) {
             $controllerObject = new $controllerName();
 
-            // نتأكد إن الدالة المطلوبة موجودة
             if (method_exists($controllerObject, $action)) {
                 $controllerObject->$action();
             } else {
-                render404("Action '$action' not found in controller '$controllerName'");
+                renderError(404, 'Page Not Found', "Action '$action' not found in controller '$controllerName'.");
             }
         } else {
-            render404("Controller class '$controllerName' not found.");
+            renderError(404, 'Page Not Found', "Controller class '$controllerName' not found.");
         }
     } else {
-        render404("Controller file not found: $controllerFile");
+        renderError(404, 'Page Not Found', "Controller file not found: $controllerFile");
     }

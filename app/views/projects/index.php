@@ -1,5 +1,5 @@
 <!-- app/views/projects/index.php -->
-<section class="section">
+<section class="section" id="projects">
     <div class="container">
         <div class="section-title">
         <h2><?= htmlspecialchars($title) ?></h2>

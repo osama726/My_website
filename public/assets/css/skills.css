@@ -1,0 +1,27 @@
+/*--------------------------------------------------------------
+# Skills Section
+--------------------------------------------------------------*/
+.skills-section .skill-box {
+    background: var(--surface-color);
+    border-radius: 12px;
+    padding: 25px 10px;
+    transition: 0.3s;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+}
+
+.skills-section .skill-box:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.skills-section .skill-box i {
+    font-size: 2.5rem;
+    color: var(--accent-color);
+    margin-bottom: 10px;
+}
+
+.skills-section .skill-box h5 {
+    font-size: 1rem;
+    color: var(--heading-color);
+    font-weight: 600;
+}

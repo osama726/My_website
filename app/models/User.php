@@ -1,57 +1,65 @@
 <?php
-// app/models/User.php
-require_once __DIR__ . '/../core/BaseModel.php'; // استيراد الكلاس الاب BaseModel
+require_once __DIR__ . '/../core/BaseModel.php';
 
 class User extends BaseModel {
-    // private $db;
 
-    // استدعاء قاعدة البيانات عند إنشاء كائن جديد
+    
     public function __construct() {
-        parent::__construct('users'); // تمرير اسم الجدول للكلاس الاب
+        parent::__construct('users');
     }
 
-    // get all users
-    // public function getAllUsers() {
-    //     $stmt = $this->db->query("SELECT * FROM users ORDER BY id DESC");
-    //     return $stmt->fetchAll();
-    // }
-
-    // search users by id
-    // public function getUserById($id) {
-    //     $stmt = $this->db->prepare("SELECT * FROM users WHERE id = ?");
-    //     $stmt->execute([$id]);
-    //     return $stmt->fetch();
-    // }
-
-    // create new user
-    public function addUser($name, $email, $password, $phone) {
-        $stmt = $this->db->prepare("INSERT INTO users (name, email, password, phone) VALUES (?, ?, ?, ?)");
-        return $stmt->execute([$name, $email, password_hash($password, PASSWORD_DEFAULT), $phone]);
+    /* ✅ إضافة مستخدم جديد (من لوحة التحكم أو التسجيل) */
+    public function addUser($name, $email, $password,  $phone = null, $role = 'user') {
+        $stmt = $this->db->prepare("
+            INSERT INTO users (name, email, password, phone, role)
+            VALUES (?, ?, ?, ?, ?)
+        ");
+        return $stmt->execute([
+            $name,
+            $email,
+            password_hash($password, PASSWORD_DEFAULT),
+            $phone,
+            $role
+        ]);
     }
 
-    // update user
-    public function updateUser($id, $name, $email, $phone) {
-        $stmt = $this->db->prepare("UPDATE users SET name = ?, email = ?, phone = ? WHERE id = ?");
-        return $stmt->execute([$name, $email, $phone, $id]);
+    /* ✅ تحديث بيانات مستخدم (بدون تغيير الباسورد) */
+    public function updateUser($id, $name, $email, $role, $phone = null) {
+        $stmt = $this->db->prepare("
+            UPDATE users
+            SET name = ?, email = ?, phone = ?, role = ?
+            WHERE id = ?
+        ");
+        return $stmt->execute([$name, $email, $phone, $role, $id]);
     }
 
+    /* ✅ تحديث كلمة السر فقط */
+    public function updatePassword($id, $newPassword) {
+        $stmt = $this->db->prepare("
+            UPDATE users SET password = ? WHERE id = ?
+        ");
+        return $stmt->execute([password_hash($newPassword, PASSWORD_DEFAULT), $id]);
+    }
+
+    /* ✅ جلب كل المستخدمين */
+    public function getAllUsers($orderBy = 'id', $direction = 'DESC') {
+        $stmt = $this->db->query("SELECT id, name, email, role, phone FROM users ORDER BY {$orderBy} {$direction}");
+        return $stmt->fetchAll();
+    }
+
+    /* ✅ جلب مستخدم حسب الإيميل */
     public function findByEmail($email) {
-        $stmt = $this->db->prepare("SELECT * FROM {$this->table} WHERE email = ?");
+        $stmt = $this->db->prepare("SELECT * FROM users WHERE email = ?");
         $stmt->execute([$email]);
         return $stmt->fetch();
     }
 
+    /* ✅ جلب دور المستخدم */
     public function getRoleById($id) {
-        $stmt = $this->db->prepare("SELECT role FROM {$this->table} WHERE id = ?");
+        $stmt = $this->db->prepare("SELECT role FROM users WHERE id = ?");
         $stmt->execute([$id]);
-        $row = $stmt->fetch();
-        return $row ? $row['role'] : null;
+        $user = $stmt->fetch();
+        return $user ? $user['role'] : null;
     }
-
-
-    // delete user
-    // public function deleteUser($id) {
-    //     $stmt = $this->db->prepare("DELETE FROM users WHERE id = ?");
-    //     return $stmt->execute([$id]);
-    // }
+    
 }

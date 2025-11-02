@@ -22,7 +22,8 @@ class UserController extends Controller {
                 $_SESSION['user'] = [
                     'id' => $stmt['id'],
                     'name' => $stmt['name'],
-                    'email' => $stmt['email']
+                    'email' => $stmt['email'],
+                    'role' => $stmt['role']
                 ];
                 $_SESSION['flash'] = "Welcome back, {$stmt['name']}!";
                 header("Location: " . BASE_URL);
@@ -60,8 +61,16 @@ class UserController extends Controller {
 
             // إنشاء المستخدم الجديد
             $userModel->addUser($name, $email, $password, $phone);
-            $_SESSION['flash'] = "Registration successful! Please log in.";
-            header("Location: " . BASE_URL . "?controller=user&action=login");
+            $stmt = $userModel->findByEmail($email);
+            $_SESSION['user'] = [
+                'id' => $stmt['id'],
+                'name' => $stmt['name'],
+                'email' => $stmt['email'],
+                'role' => $stmt['role']
+            ];
+                $_SESSION['flash'] = "Welcome back, {$stmt['name']}!";
+            // $_SESSION['flash'] = "Registration successful! Please log in.";
+            header("Location: " . BASE_URL);
             exit;
         }
     }

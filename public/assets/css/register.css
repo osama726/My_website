@@ -1,0 +1,20 @@
+/*--------------------------------------------------------------
+# Login/Register Forms
+--------------------------------------------------------------*/
+.login-section form,
+.register-section form {
+    background: var(--surface-color);
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.login-section label,
+.register-section label {
+    color: var(--heading-color);
+}
+
+.login-section .btn,
+.register-section .btn {
+    border-radius: 50px;
+}

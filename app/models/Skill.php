@@ -15,11 +15,8 @@ class Skill extends BaseModel {
         return $stmt->execute([$name, $icon]);
     }
 
-    public function updateSkill($id, $name, $icon) {
-        $stmt = $this->db->prepare("UPDATE skills
-            SET name = ?, icon = ?
-            WHERE id = ?");
-        return $stmt->execute([$id, $name, $icon]);
-
+    public function updateSkill($id, $name, $icon = null) {
+        $stmt = $this->db->prepare("UPDATE skills SET name = ?, icon = ? WHERE id = ?");
+        return $stmt->execute([$name, $icon, $id]);
     }
 }
