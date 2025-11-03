@@ -469,3 +469,95 @@
         font-size: 24px;
     }
 }
+
+.about .testimonial-section {
+    border-top: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.about .testimonial-section .testimonial-intro h3 {
+    font-size: 1.75rem;
+    margin-bottom: 1.25rem;
+    font-weight: 700;
+}
+
+.about .testimonial-section .testimonial-intro p {
+    margin-bottom: 1.5rem;
+}
+
+.about .testimonial-section .testimonial-intro .swiper-nav-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.about .testimonial-section .testimonial-intro .swiper-nav-buttons button {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background-color: color-mix(in srgb, #811517, transparent 60%);
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.about
+    .testimonial-section
+    .testimonial-intro
+    .swiper-nav-buttons
+    button:hover {
+    background-color: var(--accent-color);
+    border-color: var(--accent-color);
+    color: var(--contrast-color);
+}
+
+.about .testimonial-section .testimonial-intro .swiper-nav-buttons button i {
+    font-size: 1.25rem;
+}
+
+.about .testimonial-section .testimonial-slider {
+    overflow: hidden;
+}
+
+.about .testimonial-section .testimonial-slider .swiper-wrapper {
+    height: auto !important;
+}
+
+.about .testimonial-section .testimonial-item {
+    background-color: var(--surface-color);
+    border-radius: 10px;
+    padding: 2rem;
+    box-shadow: 0 5px 30px rgba(0, 0, 0, 0.05);
+    /* height: 100%; */
+    height: 250px;
+}
+
+.about .testimonial-section .testimonial-item .rating {
+    color: var(--accent-color);
+    font-size: 1rem;
+}
+
+.about .testimonial-section .testimonial-item p {
+    font-style: italic;
+    margin-bottom: 0;
+    font-size: 1rem;
+    line-height: 1.6;
+}
+
+.about .testimonial-section .testimonial-item .client-info .client-img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-right: 15px;
+    object-fit: cover;
+}
+
+.about .testimonial-section .testimonial-item .client-info h6 {
+    font-weight: 600;
+}
+
+.about .testimonial-section .testimonial-item .client-info span {
+    font-size: 0.85rem;
+    color: color-mix(in srgb, var(--default-color), transparent 40%);
+}

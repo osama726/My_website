@@ -14,10 +14,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title><?= $title ?? 'My Web' ?></title>
-    <!-- Bootstrap (for grid/util classes used by the template) -->
-    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"> -->
-
+    <meta content="Osama Gamal Portfolio Website" name="description">
+    <title>Osama Gamal</title>
+    <link rel="icon" type="image/png" href="<?= UPLOAD_DIR ?>Logo_osama2.png">
     <!-- Vendor CSS Files -->
     <link href="<?= BASE_URL ?>assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link href="<?= BASE_URL ?>assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">

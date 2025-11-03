@@ -1,27 +1,159 @@
 /*--------------------------------------------------------------
 # Skills Section
 --------------------------------------------------------------*/
-.skills-section .skill-box {
-    background: var(--surface-color);
-    border-radius: 12px;
-    padding: 25px 10px;
-    transition: 0.3s;
-    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+.skills {
+    position: relative;
+    overflow: hidden;
+    padding: 80px 0;
+    background: var(--background-color);
 }
 
-.skills-section .skill-box:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+/* تأثير خلفي خفيف زي الـ about */
+.skills::before {
+    content: "";
+    position: absolute;
+    top: -40%;
+    left: -10%;
+    width: 800px;
+    height: 800px;
+    background: radial-gradient(
+        circle,
+        color-mix(in srgb, var(--accent-color), transparent 85%) 0%,
+        transparent 70%
+    );
+    border-radius: 50%;
+    z-index: 0;
+    pointer-events: none;
 }
 
-.skills-section .skill-box i {
+.skills .container {
+    position: relative;
+    z-index: 1;
+}
+
+/* عنوان القسم */
+.skills .section-title {
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+.skills .section-title h2 {
     font-size: 2.5rem;
-    color: var(--accent-color);
-    margin-bottom: 10px;
+    font-weight: 700;
+    color: var(--heading-color);
 }
 
-.skills-section .skill-box h5 {
-    font-size: 1rem;
-    color: var(--heading-color);
+.skills .section-title p {
+    font-size: 1.125rem;
+    color: color-mix(in srgb, var(--default-color), transparent 25%);
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+/* شبكة المهارات */
+.skills .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 30px;
+}
+
+/* كل عنصر مهارة */
+.skills .skill-item {
+    background: var(--surface-color);
+    border-radius: 18px;
+    padding: 30px 25px;
+    max-width: 300px;
+    text-align: center;
+    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.08);
+    position: relative;
+    border: 2px solid transparent; 
+    transition: all 0.3s ease, box-shadow 0.5s ease;
+}
+
+.skills .skill-item:hover {
+    transform: translateY(-6px) scale(1.03);
+    box-shadow: 
+        0 0 15px rgba(var(--accent-rgb), 0.3),
+        0 10px 35px rgba(0, 0, 0, 0.15);
+    border-color: var(--accent-color);
+}
+
+/* الأيقونة */
+.skills .skill-item i {
+    font-size: 2.8rem;
+    color: var(--accent-color);
+    margin-bottom: 15px;
+    transition: transform 0.3s ease, color 0.3s ease;
+}
+
+/* اسم المهارة */
+.skills .skill-item h4 {
+    font-size: 1.125rem;
     font-weight: 600;
+    color: var(--heading-color);
+    margin-bottom: 8px;
+}
+
+/* تأثير خفيف */
+.skills .skill-item::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    transition: opacity 0.4s;
+    background: radial-gradient(
+        circle at 70% 30%, /* تغيير موضع التوهج */
+        color-mix(in srgb, var(--accent-color), transparent 90%) 0%,
+        transparent 70%
+    );
+}
+
+.skills .skill-item:hover::after {
+    opacity: .9;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .skills {
+        padding: 60px 0;
+    }
+
+    .skills .section-title h2 {
+        font-size: 2rem;
+    }
+}
+
+.skills .skill-item:hover i {
+    color: color-mix(in srgb, var(--accent-color), white 20%); /* يفتح لون الأيقونة */
+    transform: scale(1.1); /* تكبير الأيقونة قليلا */
+}
+
+
+/*--------------------------------------------------------------
+# Skills Empty State
+--------------------------------------------------------------*/
+.skills .skill-empty-state {
+    border: 1px solid color-mix(in srgb, var(--surface-color), transparent 85%); 
+    border-radius: 18px; /* نفس نصف القطر المستخدم في skill-item */
+    padding: 40px 20px;
+    box-shadow: 0 4px 15px rgba(111, 28, 28, 0.734); /* ظل خفيف */
+    transition: all 0.3s ease;
+}
+
+.skills .skill-empty-state:hover {
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+}
+
+/* الأيقونة الكبيرة */
+.skills .skill-empty-state i {
+    color: var(--accent-color);
+    opacity: 0.8;
+    font-size: 3.5rem; /* لتكون أكبر قليلاً */
+}
+
+/* النص التوضيحي (Lead) */
+.skills .skill-empty-state .lead {
+    font-size: 1rem;
+    max-width: 600px;
+    margin: 0 auto 20px auto;
 }

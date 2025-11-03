@@ -145,4 +145,92 @@
             </div>
         </div>
     </div>
+    
+    <div class="testimonial-section mt-5 pt-5" data-aos="fade-up" data-aos-delay="100">
+        <div class="row">
+            <div class="col-lg-4" data-aos="fade-right" data-aos-delay="200">
+                <div class="testimonial-intro">
+                    <h3>Technical Overview</h3>
+                    <p>Here’s an overview of my main skills and areas of focus in development and design.</p>
+                    <div class="swiper-nav-buttons mt-4">
+                        <button class="slider-prev"><i class="bi bi-arrow-left"></i></button>
+                        <button class="slider-next"><i class="bi bi-arrow-right"></i></button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-8" data-aos="fade-left" data-aos-delay="300">
+                <div class="testimonial-slider swiper init-swiper">
+                    <script type="application/json" class="swiper-config">
+                        {
+                            "loop": true,
+                            "speed": 800,
+                            "autoplay": {
+                            "delay": 5000
+                            },
+                            "slidesPerView": 1,
+                            "spaceBetween": 30,
+                            "navigation": {
+                            "nextEl": ".slider-next",
+                            "prevEl": ".slider-prev"
+                            },
+                            "breakpoints": {
+                            "768": {
+                                "slidesPerView": 2
+                            }
+                            }
+                        }
+                    </script>
+                    <div class="swiper-wrapper">
+
+                        <!-- Fundamentals -->
+                        <div class="swiper-slide">
+                            <div class="testimonial-item">
+                                <div class="rating mb-3">
+                                    <i class="bi bi-code-slash"></i>
+                                </div>
+                                <h5>Fundamentals</h5>
+                                <p>I learned the basics and OOP in C++ and solved many problems with it. I also studied networking fundamentals and continue to practice problem-solving.</p>
+                            </div>
+                        </div>
+
+                        <!-- Front End -->
+                        <div class="swiper-slide">
+                            <div class="testimonial-item">
+                                <div class="rating mb-3">
+                                    <i class="bi bi-window"></i>
+                                </div>
+                                <h5>Front End</h5>
+                                <p>I have solid front-end skills that complement my back-end work. I’ve built several small projects using HTML, CSS, and JavaScript—including this website.</p>
+                            </div>
+                        </div>
+
+                        <!-- Back End -->
+                        <div class="swiper-slide">
+                            <div class="testimonial-item">
+                                <div class="rating mb-3">
+                                    <i class="bi bi-hdd-stack"></i>
+                                </div>
+                                <h5>Back End</h5>
+                                <p>The back-end is my main focus. I build web applications using PHP and Laravel, ensuring security, scalability, and performance.</p>
+                            </div>
+                        </div>
+
+                        <!-- Design -->
+                        <div class="swiper-slide">
+                            <div class="testimonial-item">
+                                <div class="rating mb-3">
+                                    <i class="bi bi-palette"></i>
+                                </div>
+                                <h5>Design</h5>
+                                <p>I’ve gained hands-on experience in design—creating brand visuals, banners, and card designs using modern design tools.</p>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
 </section>
