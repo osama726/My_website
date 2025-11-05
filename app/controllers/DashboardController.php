@@ -48,28 +48,34 @@ class DashboardController extends Controller {
             $title = trim($_POST['title']);
             $description = trim($_POST['description']);
             $link = trim($_POST['link']);
+            $github_link = trim($_POST['github_link']);
             $image = null;
 
             // ✅ رفع الصورة لو موجودة
-            if (!empty($_FILES['image']['name'])) {
-                $uploadDir = __DIR__ . UPLOAD_DIR;
-                if (!is_dir($uploadDir)) mkdir($uploadDir, 0777, true);
+            // ✅ مسار فعلي داخل مجلد المشروع
+            $uploadDir = __DIR__ . '/../../public/uploads/';
 
-                $imageName = time() . '_' . basename($_FILES['image']['name']);
-                $targetPath = $uploadDir . $imageName;
-
-                if (move_uploaded_file($_FILES['image']['tmp_name'], $targetPath)) {
-                    $image = $imageName;
-                }
+            if (!is_dir($uploadDir)) {
+                mkdir($uploadDir, 0777, true);
             }
+
+            // اسم الصورة الجديد
+            $imageName = time() . '_' . basename($_FILES['image']['name']);
+            $targetPath = $uploadDir . $imageName;
+
+            // ✅ لو الصورة اترفعت بنجاح نحفظ اسمها فقط في قاعدة البيانات
+            if (move_uploaded_file($_FILES['image']['tmp_name'], $targetPath)) {
+                $image = $imageName;
+            }
+
 
             // تعديل أو إضافة حسب الحالة
             if (!empty($_POST['project_id'])) {
                 $id = $_POST['project_id'];
-                $projectModel->updateProject($id, $title, $description, $image, $link);
+                $projectModel->updateProject($id, $title, $description, $image, $link, $github_link);
                 $_SESSION['flash'] = "✅ Project updated successfully.";
             } else {
-                $projectModel->addProject($title, $description, $image, $link);
+                $projectModel->addProject($title, $description, $image, $link, $github_link);
                 $_SESSION['flash'] = "✅ Project added successfully.";
             }
 

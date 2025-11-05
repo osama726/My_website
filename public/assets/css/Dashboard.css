@@ -1,21 +1,261 @@
 /*--------------------------------------------------------------
-# Dashboard
+# Dashboard Section Styling
 --------------------------------------------------------------*/
-.dashboard-section .card {
+.dashboard-section {
+    padding-top: 60px;
+    padding-bottom: 60px;
+}
+
+.dashboard-section .section-title {
+    margin-bottom: 40px;
+}
+
+.dashboard-section .accent-text {
+    color: var(--accent-color);
+}
+
+/* 1. تصميم بطاقة الإحصائيات (Stat Card) */
+.dashboard-section .stat-card {
     background: var(--surface-color);
-    border-radius: 15px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
-    transition: 0.3s;
-    color: #a15252;
+    padding: 25px;
+    border-radius: 14px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease;
+    border: 1px solid color-mix(in srgb, var(--default-color), transparent 90%);
+    position: relative;
+    overflow: hidden;
 }
-.dashboard-section .card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 6px 25px rgba(0, 0, 0, 0.2);
+
+.dashboard-section .stat-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
 }
-.dashboard-section .badge {
-    background: var(--accent-color);
-    color: var(--nav-color);
-    padding: 6px 10px;
-    border-radius: 6px;
+
+/* الأيقونة الدائرية */
+.dashboard-section .stat-icon {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 15px;
+    color: white;
+    font-size: 1.5rem;
+    position: absolute;
+    left: 25px;
+    top: 25px;
+    opacity: 0.9;
+}
+
+/* الألوان الخاصة بالأيقونات */
+.dashboard-section .stat-icon.bg-accent {
+    background-color: var(--accent-color);
+}
+.dashboard-section .stat-icon.bg-secondary {
+    background-color: #6c757d; /* لون ثانوي */
+}
+.dashboard-section .stat-icon.bg {
+    background-color: rgb(95 10 10); /* لون معلومات */
+}
+
+/* المحتوى النصي */
+.dashboard-section .stat-content {
+    text-align: right;
+    width: 100%;
+    padding-left: 70px; /* لترك مساحة للأيقونة */
+}
+
+.dashboard-section .stat-label {
+    margin-bottom: 0;
+    color: color-mix(in srgb, var(--default-color), transparent 30%);
     font-size: 0.9rem;
+}
+
+.dashboard-section .stat-value {
+    font-size: 2rem;
+    font-weight: 700;
+    margin: 0;
+    color: var(--heading-color);
+}
+
+/* زر إدارة المشاريع/المهارات */
+.dashboard-section .btn-manage {
+    width: 100%;
+    display: block;
+    text-align: right;
+    color: var(--accent-color);
+    font-weight: 600;
+    font-size: 0.9rem;
+    margin-top: 20px;
+    padding-top: 10px;
+    border-top: 1px solid
+        color-mix(in srgb, var(--default-color), transparent 90%);
+    text-decoration: none;
+}
+
+.dashboard-section .btn-manage i {
+    margin-left: 5px;
+    transition: transform 0.3s ease;
+}
+
+.dashboard-section .stat-card:hover .btn-manage i {
+    transform: translateX(5px);
+}
+
+/* 2. تصميم بطاقة معلومات المستخدم (Info Box) */
+.dashboard-section .info-box {
+    background: var(--surface-color);
+    padding: 30px;
+    border-radius: 14px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    border: 1px solid color-mix(in srgb, var(--default-color), transparent 90%);
+}
+
+.dashboard-section .info-box h4 {
+    color: var(--heading-color);
+    font-weight: 700;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 10px;
+    margin-bottom: 15px;
+}
+
+.dashboard-section .info-box li {
+    padding: 5px 0;
+    color: var(--default-color);
+}
+
+.dashboard-section .info-box li i {
+    color: var(--accent-color);
+    margin-right: 10px;
+}
+
+
+
+/*--------------------------------------------------------------
+# Dashboard Projects Styling
+--------------------------------------------------------------*/
+.dashboard-card {
+    background: #423d35;
+    border-radius: 16px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    padding: 20px 25px;
+    border: 1px solid color-mix(in srgb, var(--default-color), transparent 90%);
+    transition: all 0.3s ease;
+    margin-top: -50px;
+}
+.dashboard-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.dashboard-card .card-header {
+    border-bottom: 1px solid
+        color-mix(in srgb, var(--default-color), transparent 90%);
+    margin-bottom: 20px;
+}
+.dashboard-card h4 {
+    font-size: 1.1rem;
+    color: var(--heading-color);
+    font-weight: 700;
+}
+
+/* ===== Table Style ===== */
+.custom-table {
+    width: 100%;
+    background-color: #423d35;
+}
+.custom-table thead {
+    background: color-mix(in srgb, var(--accent-color), transparent 85%);
+    color: var(--heading-color);
+    font-size: 0.9rem;
+}
+.custom-table tbody tr {
+    transition: background 0.2s;
+}
+.custom-table tbody tr:hover {
+    background: color-mix(in srgb, var(--accent-color), transparent 95%);
+}
+.custom-table tbody tr td {
+    vertical-align: middle;
+    padding: 12px 15px;
+    border-top: 1px solid
+        color-mix(in srgb, var(--default-color), transparent 90%);
+    color: var(--default-color);
+    font-size: 0. nine rem;
+}
+
+.table-thumb {
+    width: 100px;
+    height: 80px;
+    border-radius: 6px;
+    object-fit: cover;
+}
+.link-icon {
+    margin-right: 8px;
+    color: var(--accent-color);
+    font-size: 1.5rem;
+}
+.btn-icon {
+    display: block;
+    padding: 6px 8px;
+    border-radius: 6px;
+    text-decoration: none;
+    margin: 5px;
+    transition: all 0.3s ease;
+}
+.btn-icon.edit {
+    background: color-mix(in srgb, var(--accent-color), transparent 80%);
+    color: var(--contrast-color);
+}
+.btn-icon.delete {
+    background: color-mix(in srgb, #ff4d4f, transparent 70%);
+    color: #fff;
+}
+.btn-icon:hover {
+    opacity: 0.9;
+    transform: translateY(-2px);
+}
+
+/* ===== Form Styling ===== */
+.dashboard-form .form-control {
+    background: color-mix(in srgb, var(--default-color), transparent 92%);
+    border: none;
+    border-radius: 10px;
+    padding: 10px 14px;
+    color: var(--default-color);
+}
+.dashboard-form .form-control:focus {
+    outline: 2px solid var(--accent-color);
+    background: color-mix(in srgb, var(--default-color), transparent 85%);
+}
+.dashboard-form .form-label {
+    font-weight: 600;
+    color: var(--heading-color);
+    font-size: 0.9rem;
+}
+.preview-img {
+    width: 100px;
+    height: auto;
+    margin-top: 10px;
+    border-radius: 8px;
+}
+.btn-submit {
+    /* background: var(--accent-color); */
+    background: var(--accent-color);
+    border: none;
+    border-radius: 50px;
+    padding: 10px 20px;
+    width: 100%;
+    color: var(--contrast-color);
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+.btn-submit:hover {
+    background: color-mix(in srgb, var(--accent-color), black 10%);
+    transform: translateY(-2px);
 }

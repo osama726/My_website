@@ -15,6 +15,7 @@ class HomeController extends Controller {
         // نستخدم دالة findAll التي ورثناها من BaseModel
         // للحصول على قائمة المشاريع
         $projects = $projectModel->findAll();
+        $showAll = false; 
 
         // للحصول على قائمة المهارات
         $skills = $skillModel->findAll('id', 'DESC');
@@ -26,7 +27,8 @@ class HomeController extends Controller {
             'message' => 'This is the home page',
             'projects' => $projects,
             'skills' => $skills,
-            'about' => $aboutData
+            'about' => $aboutData,
+            'showAll' => $showAll
         ]);
     }
 }

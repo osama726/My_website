@@ -1,20 +1,84 @@
 /*--------------------------------------------------------------
-# Login/Register Forms
+# Login/Register Section Styling
 --------------------------------------------------------------*/
-.login-section form,
-.register-section form {
-    background: var(--surface-color);
-    padding: 30px;
-    border-radius: 15px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+.login-section {
+    /* ضمان أن قسم الدخول يأخذ مساحة كافية */
+    min-height: 70vh; 
+    display: flex;
+    align-items: center; /* توسيط عمودي */
 }
 
-.login-section label,
-.register-section label {
+/* 1. بطاقة الدخول (Auth Card) */
+.auth-card {
+    background: var(--surface-color); /* خلفية البطاقة */
+    padding: 35px 30px;
+    border-radius: 18px; /* حواف دائرية */
+    box-shadow: 0 10px 30px rgba(0, 0, 0); /* ظل واضح */
+    border: 1px solid color-mix(in srgb, var(--default-color), transparent 90%);
+    transition: all 0.3s ease;
+}
+
+.auth-card:hover {
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15); /* تظليل أقوى عند التمرير */
+}
+
+/* 2. تنسيق الـLabels والأيقونات */
+.auth-card .form-label-styled {
+    display: block;
+    font-weight: 600;
     color: var(--heading-color);
+    margin-bottom: 5px;
+    font-size: 0.95rem;
 }
 
-.login-section .btn,
-.register-section .btn {
-    border-radius: 50px;
+.auth-card .form-label-styled i {
+    color: var(--accent-color);
+    margin-right: 8px;
+}
+
+/* 3. تنسيق حقول الإدخال (Form Controls) */
+.auth-card .form-control {
+    color: var(--accent-color);
+    border-radius: 8px;
+    padding: 10px 15px;
+    border: 1px solid color-mix(in srgb, var(--default-color), transparent 70%);
+    background: color-mix(in srgb, var(--surface-color), transparent 50%);
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.auth-card .form-control::placeholder {
+    color: var(--accent-color);
+}
+
+.auth-card .form-control:focus {
+    border-color: var(--accent-color);
+    box-shadow: 0 0 0 0.25rem rgba(var(--accent-rgb), 0.25); /* توهج حول الحقل */
+    background: var(--surface-color);
+}
+
+/* 4. زر الإرسال (Submit Button) */
+.auth-card .btn-accent {
+    background: var(--accent-rgb);
+    border-color: var(--accent-color);
+    color: white;
+    font-weight: 600;
+    padding: 10px;
+    border-radius: 8px;
+    transition: background-color 0.3s ease, transform 0.1s;
+}
+
+.auth-card .btn-accent:hover {
+    background: color-mix(in srgb, var(--accent-color), black 10%);
+    border-color: color-mix(in srgb, var(--accent-color), black 10%);
+}
+
+/* 5. رابط التسجيل */
+.auth-card .accent-link {
+    color: var(--accent-color);
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.auth-card .accent-link:hover {
+    text-decoration: underline;
 }

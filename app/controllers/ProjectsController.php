@@ -7,10 +7,12 @@ class ProjectsController extends Controller {
         $projectModel = $this->model('Project');
         // لو الموديل مش جاهز ارجع مصفوفة فارغة 
         $projects = method_exists($projectModel, 'findAll') ? $projectModel->findAll() : [];
+        $showAll = true;
 
         $this->view('projects/index', [
             'title' => 'Projects',
-            'projects' => $projects
+            'projects' => $projects,
+            'showAll' => $showAll
         ]);
     }
 }

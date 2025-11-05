@@ -1,123 +1,132 @@
-<?php
-// app/views/dashboard/projects.php
+<section class="section dashboard-section">
+    <div class="container" data-aos="fade-up">
 
-// بيانات الصفحة
-// المتغيرات اللي جاية من الكنترولر: $projects, $title
-// وممكن يجي كمان project لو احنا جايين من وضع تعديل
-?>
-
-<section class="dashboard-section container py-5">
-
-    <h1 class="mb-4 text-center"><?= htmlspecialchars($title) ?></h1>
-
-    <!-- Flash Message -->
-    <?php if (!empty($_SESSION['flash'])): ?>
-        <div class="alert alert-info text-center mb-4">
-            <?= htmlspecialchars($_SESSION['flash']); ?>
+        <div class="section-title text-center">
+            <h3 class="subtitle mt-5">Manage your portfolio projects easily</h3>
         </div>
-        <?php unset($_SESSION['flash']); ?>
-    <?php endif; ?>
 
-    <div class="row">
-        <!-- 🧩 عمود عرض المشاريع -->
-        <div class="col-md-8">
-            <div class="card p-3 shadow-sm">
-                <h3 class="mb-3">All Projects</h3>
-
-                <?php if (!empty($projects)): ?>
-                    <table class="table table-dark table-striped align-middle">
-                        <thead>
-                            <tr>
-                                <th>#</th>
-                                <th>Title</th>
-                                <th>Description</th>
-                                <th>Image</th>
-                                <th>Link</th>
-                                <th>Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php foreach ($projects as $p): ?>
-                                <tr>
-                                    <td><?= $p['id'] ?></td>
-                                    <td><?= htmlspecialchars($p['title']) ?></td>
-                                    <td><?= htmlspecialchars(substr($p['description'], 0, 50)) ?>...</td>
-                                    <td>
-                                        <?php if (!empty($p['image'])): ?>
-                                            <img src="<?= UPLOAD_DIR . htmlspecialchars($p['image']) ?>" alt="" style="width: 60px; height: 40px; object-fit: cover;">
-                                        <?php else: ?>
-                                            <span class="text-muted">No image</span>
-                                        <?php endif; ?>
-                                    </td>
-                                    <td>
-                                        <?php if (!empty($p['link'])): ?>
-                                            <a href="<?= htmlspecialchars($p['link']) ?>" target="_blank">Visit</a>
-                                        <?php else: ?>
-                                            <span class="text-muted">N/A</span>
-                                        <?php endif; ?>
-                                    </td>
-                                    <td>
-                                        <a href="<?= BASE_URL ?>?controller=dashboard&action=projects&id=<?= $p['id'] ?>" class="btn btn-sm btn-warning">Edit</a>
-                                        <a href="<?= BASE_URL ?>?controller=dashboard&action=projects&delete=<?= $p['id'] ?>" class="btn btn-sm btn-danger" onclick="return confirm('Delete this project?')">Delete</a>
-                                    </td>
-                                </tr>
-                            <?php endforeach; ?>
-                        </tbody>
-                    </table>
-                <?php else: ?>
-                    <p>No projects found.</p>
-                <?php endif; ?>
+        <!-- Flash Message -->
+        <?php if (!empty($_SESSION['flash'])): ?>
+            <div class="alert alert-info text-center mb-4">
+                <?= htmlspecialchars($_SESSION['flash']); ?>
             </div>
-        </div>
+            <?php unset($_SESSION['flash']); ?>
+        <?php endif; ?>
 
-        <!-- 🧩 عمود الإضافة أو التعديل -->
-        <div class="col-md-4">
-            <div class="card p-3 shadow-sm">
+        <div class="row g-4">
+        
+            <!-- 🧱 Projects Table -->
+            <div class="col-lg-8">
+                <div class="dashboard-card">
+                    <div class="card-header">
+                        <h4><i class="bi bi-list-task me-2"></i> All Projects</h4>
+                    </div>
+
+                    <?php if (!empty($projects)): ?>
+                        <div class="table-responsive">
+                            <table class="custom-table align-middle mb-0">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Title</th>
+                                        <th>Description</th>
+                                        <th>Image</th>
+                                        <th>Links</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php foreach ($projects as $p): ?>
+                                        <tr>
+                                            <td><?= $p['id'] ?></td>
+                                            <td><?= htmlspecialchars($p['title']) ?></td>
+                                            <td><?= htmlspecialchars(substr($p['description'], 0, 60)) ?>...</td>
+                                            <td>
+                                                <?php if (!empty($p['image'])): ?>
+                                                    <img src="<?= UPLOAD_DIR . htmlspecialchars($p['image']) ?>" alt="" class="table-thumb">
+                                                <?php else: ?>
+                                                    <span class="text-muted">No image</span>
+                                                <?php endif; ?>
+                                            </td>
+                                            <td>
+                                                <?php if (!empty($p['link'])): ?>
+                                                    <a href="<?= htmlspecialchars($p['link']) ?>" target="_blank" class="link-icon" title="Live Preview"><i class="bi bi-box-arrow-up-right"></i></a>
+                                                <?php endif; ?>
+                                                <?php if (!empty($p['github_link'])): ?>
+                                                    <a href="<?= htmlspecialchars($p['github_link']) ?>" target="_blank" class="link-icon" title="GitHub Repo"><i class="bi bi-github"></i></a>
+                                                <?php endif; ?>
+                                            </td>
+                                            <td>
+                                                <a href="<?= BASE_URL ?>?controller=dashboard&action=projects&id=<?= $p['id'] ?>" class="btn-icon edit"><i class="bi bi-pencil-fill"></i></a>
+                                                <a href="<?= BASE_URL ?>?controller=dashboard&action=projects&delete=<?= $p['id'] ?>" onclick="return confirm('Delete this project?')" class="btn-icon delete"><i class="bi bi-trash3-fill"></i></a>
+                                            </td>
+                                        </tr>
+                                    <?php endforeach; ?>
+                                </tbody>
+                            </table>
+                        </div>
+                    <?php else: ?>
+                        <p class="text-center py-4 text-muted">No projects found.</p>
+                    <?php endif; ?>
+                </div>
+            </div>
+
+            <!-- 🧩 Add/Edit Project Form -->
+            <div class="col-lg-4">
                 <?php
-                    // لو الصفحة جايه ومعاها ?id= يبقى وضع تعديل
                     $isEdit = isset($_GET['id']);
                     $formTitle = $isEdit ? 'Edit Project' : 'Add New Project';
                     $formAction = BASE_URL . "?controller=dashboard&action=projects";
                     $currentProject = $isEdit ? $project : null;
                 ?>
-
-                <h3 class="mb-3 text-center"><?= $formTitle ?></h3>
-
-                <form action="<?= $formAction ?>" method="POST" enctype="multipart/form-data">
-                    <?php if ($isEdit && !empty($currentProject['id'])): ?>
-                        <input type="hidden" name="project_id" value="<?= htmlspecialchars($currentProject['id']) ?>">
-                    <?php endif; ?>
-
-                    <div class="mb-3">
-                        <label for="title" class="form-label">Project Title</label>
-                        <input type="text" name="title" id="title" class="form-control"
-                            value="<?= $isEdit ? htmlspecialchars($currentProject['title']) : '' ?>" required>
+                <div class="dashboard-card">
+                    <div class="card-header text-center">
+                        <h4><i class="bi bi-plus-circle"></i> <?= $formTitle ?></h4>
                     </div>
 
-                    <div class="mb-3">
-                        <label for="description" class="form-label">Description</label>
-                        <textarea name="description" id="description" class="form-control" rows="3" required><?= $isEdit ? htmlspecialchars($currentProject['description']) : '' ?></textarea>
-                    </div>
-
-                    <div class="mb-3">
-                        <label for="link" class="form-label">Project Link</label>
-                        <input type="url" name="link" id="link" class="form-control"
-                            value="<?= $isEdit ? htmlspecialchars($currentProject['link']) : '' ?>">
-                    </div>
-
-                    <div class="mb-3">
-                        <label for="image" class="form-label">Project Image</label>
-                        <input type="file" name="image" id="image" class="form-control">
-                        <?php if ($isEdit && !empty($currentProject['image'])): ?>
-                            <img src="<?= UPLOAD_DIR . htmlspecialchars($currentProject['image']) ?>" alt="Current" style="width:100px; margin-top:10px; border-radius:8px;">
+                    <form action="<?= $formAction ?>" method="POST" enctype="multipart/form-data" class="dashboard-form">
+                        <?php if ($isEdit && !empty($currentProject['id'])): ?>
+                            <input type="hidden" name="project_id" value="<?= htmlspecialchars($currentProject['id']) ?>">
                         <?php endif; ?>
-                    </div>
 
-                    <button type="submit" class="btn btn-success w-100">
-                        <?= $isEdit ? 'Update Project' : 'Add Project' ?>
-                    </button>
-                </form>
+                        <div class="mb-3">
+                            <label for="title" class="form-label">Project Title</label>
+                            <input type="text" name="title" id="title" class="form-control"
+                                value="<?= $isEdit ? htmlspecialchars($currentProject['title']) : '' ?>" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="description" class="form-label">Description</label>
+                            <textarea name="description" id="description" class="form-control" rows="3" required><?= $isEdit ? htmlspecialchars($currentProject['description']) : '' ?></textarea>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="link" class="form-label">Project Link</label>
+                            <input type="url" name="link" id="link" class="form-control"
+                                value="<?= $isEdit ? htmlspecialchars($currentProject['link']) : '' ?>">
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="github_link" class="form-label">GitHub Link</label>
+                            <input type="url" name="github_link" id="github_link" class="form-control"
+                                value="<?= $isEdit ? htmlspecialchars($currentProject['github_link']) : '' ?>">
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="image" class="form-label">Project Image</label>
+                            <input type="file" name="image" id="image" class="form-control">
+                            <?php if ($isEdit && !empty($currentProject['image'])): ?>
+                                <img src="<?= UPLOAD_DIR . htmlspecialchars($currentProject['image']) ?>" alt="Current" class="preview-img">
+                            <?php endif; ?>
+                        </div>
+
+                        <button type="submit" class="btn-submit">
+                            <?= $isEdit ? 'Update Project' : 'Add Project' ?>
+                        </button>
+                    </form>
+                </div>
             </div>
         </div>
+
     </div>
 </section>

@@ -4,8 +4,10 @@
 @import url('errors.css');
 @import url('home.css');
 @import url('about.css');
-@import url('Dashboard.css');
 @import url('skills.css');
+@import url('project.css');
+@import url('Register.css');
+@import url('Dashboard.css');
 @import url('register.css');
 
 /* Main CSS file for the application */

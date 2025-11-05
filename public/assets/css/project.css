@@ -1,0 +1,173 @@
+/* ======== Projects Section - Text over image ======== */
+.projects .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 30px;
+    margin-top: 40px;
+}
+
+/* Card base */
+.project-card {
+    /* background: var(--surface-color); */
+    background-color: rgba(0, 0, 0, 0);
+
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.project-card:hover {
+    box-shadow: 0 5px 20px var(--accent-color);
+}
+
+/* Image + overlay */
+.project-thumb {
+    position: relative;
+    height: 300px;
+    overflow: hidden;
+    transition: 0.3s ease;
+}
+
+.project-thumb img {
+    transition: transform 0.5s ease;
+}
+.project-thumb:hover img {
+    transform: scale(1.05);
+}
+
+.project-thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* overlay text layer */
+.project-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        to top,
+        rgb(0 0 0 / 79%),
+        rgb(0 0 0 / 60%) 40%,
+        #00000000
+    );
+    color: var(--contrast-color);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 20px;
+    text-align: left;
+}
+
+.project-overlay h4 {
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 6px;
+}
+
+.project-overlay p {
+    font-size: 14px;
+    color: color-mix(in srgb, var(--contrast-color), transparent 20%);
+    line-height: 1.5;
+}
+
+/* No Image Fallback */
+.no-image {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    background: color-mix(in srgb, var(--accent-color), transparent 95%);
+    color: color-mix(in srgb, var(--accent-color), transparent 40%);
+    font-size: 40px;
+}
+
+/* Buttons under the image */
+.project-buttons {
+    display: flex;
+    justify-content: flex-start;
+    gap: 10px;
+    padding: 15px 20px 20px;
+}
+
+.project-buttons a {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 16px;
+    border-radius: 50px;
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    max-height: 50px;
+}
+
+/* Buttons color styling */
+.btn-view {
+    background: var(--accent-color);
+    color: var(--contrast-color);
+}
+
+.btn-view:hover {
+    background: color-mix(in srgb, var(--accent-color), black 10%);
+}
+
+.btn-code {
+    background: var(--contrast-color);
+    color: var(--accent-color);
+}
+
+.btn-code:hover {
+    background: var(--accent-color);
+    color: var(--contrast-color);
+}
+
+/* "View More" Button */
+.btn-view-more {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 24px;
+    border-radius: 50px;
+    font-size: 15px;
+    font-weight: 600;
+    text-decoration: none;
+    background: var(--accent-color);
+    color: var(--contrast-color);
+    transition: all 0.3s ease;
+}
+
+.btn-view-more:hover {
+    background: color-mix(in srgb, var(--accent-color), black 10%);
+    transform: translateY(-2px);
+}
+
+/* Responsive adjustments */
+@media (max-width: 576px) {
+    .projects .projects-grid {
+        gap: 20px;
+    }
+
+    .project-thumb {
+        height: 200px;
+    }
+
+    .project-overlay h4 {
+        font-size: 16px;
+    }
+
+    .project-overlay p {
+        font-size: 13px;
+    }
+
+    .project-buttons {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .project-buttons a {
+        text-align: center;
+    }
+}
