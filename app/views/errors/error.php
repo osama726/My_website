@@ -1,5 +1,6 @@
 <?php
     // app/views/errors/error.php
+    // $code = $code ?? 404;
     http_response_code($code ?? 404);
 ?>
 

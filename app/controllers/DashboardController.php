@@ -10,16 +10,21 @@ class DashboardController extends Controller {
         $projectModel = $this->model('Project');
         $skillModel = $this->model('Skill');
         $userModel = $this->model('User');
+        $messageModel = $this->model('Message'); // 💡 إضافة Message Model
 
         $projects = $projectModel->findAll();
         $skills = $skillModel->findAll();
         $user = $userModel->findById($_SESSION['user']['id']);
+        
+        // 💡 جلب عدد الرسائل غير المقروءة (نفترض وجود دالة لهذا الغرض)
+        $totalUnreadMessages = $messageModel->countUnread(); 
 
         $this->view('dashboard/index', [
             'title' => 'Dashboard',
             'user' => $user,
             'projects' => $projects,
-            'skills' => $skills
+            'skills' => $skills,
+            'totalUnreadMessages' => $totalUnreadMessages // تمرير العداد
         ]);
     }
 
@@ -243,6 +248,39 @@ class DashboardController extends Controller {
             'title' => 'Manage Users',
             'users' => $users,
             'userData' => $userData
+        ]);
+    }
+
+
+    // message management method    
+    public function messages() {
+        $this->authorizeAdmin();
+        $messageModel = $this->model('Message');
+        
+        // 🗑️ معالجة الحذف (Delete Action)
+        if (isset($_GET['delete'])) {
+            $id = (int) $_GET['delete'];
+            $messageModel->delete($id);
+            $_SESSION['flash'] = "🗑️ Message deleted successfully.";
+            header("Location: " . BASE_URL . "?controller=dashboard&action=messages");
+            exit;
+        }
+        
+        // 💡 معالجة تحديد الرسالة كمقروءة (Mark as Read)
+        if (isset($_GET['read'])) {
+            $id = (int) $_GET['read'];
+            // نفترض وجود دالة لتحديث حالة القراءة في Model
+            $messageModel->markAsRead($id); 
+            header("Location: " . BASE_URL . "?controller=dashboard&action=messages");
+            exit;
+        }
+
+        // جلب كل الرسائل من الأحدث للأقدم
+        $messages = $messageModel->findAll('created_at', 'DESC'); 
+
+        $this->view('dashboard/messages', [
+            'title' => 'Manage Messages',
+            'messages' => $messages
         ]);
     }
 

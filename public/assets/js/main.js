@@ -48,17 +48,7 @@
 
   });
 
-  /**
-   * Toggle mobile nav dropdowns
-   */
-  document.querySelectorAll('.navmenu .toggle-dropdown').forEach(navmenu => {
-    navmenu.addEventListener('click', function(e) {
-      e.preventDefault();
-      this.parentNode.classList.toggle('active');
-      this.parentNode.nextElementSibling.classList.toggle('dropdown-active');
-      e.stopImmediatePropagation();
-    });
-  });
+
 
   /**
    * Preloader
@@ -237,3 +227,204 @@
   document.addEventListener('scroll', navmenuScrollspy);
 
 })();
+
+
+/* Validation Contact Form JS File */
+/* global $, alert, console */
+// يجب التأكد من تضمين jQuery في ملف layouts/main.php
+
+$(function () {
+    'use strict';
+
+    // 💡 تعريف متغيرات الخطأ: نبدأها بـ TRUE لتشغيل التحقق عند الضغط الأول
+    let nameError    = true,
+        emailError   = true, // تم تعديله ليتناسب مع الكود السابق
+        subjectError = true, // تم إضافته
+        phoneError   = false, // 💡 الهاتف ليس إجباري، نبدأ بـ FALSE
+        msgError     = true;
+
+    // دالة مساعدة للتحقق من صحة الإيميل
+    function isValidEmail(email) {
+        const pattern = /^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/;
+        return pattern.test(email);
+    }
+    
+    // ======================================
+    // Start Name Field (.username)
+    // ======================================
+    $('.username').blur(function () {
+        $('.empty-username, .length-username').hide();
+        $(this).css('border', '1px solid #ddd'); // إزالة الحدود الحمراء السابقة
+
+        const val = $(this).val().trim();
+
+        if (val === '') {
+            $(this).css('border', '1px solid #f00');
+            $('.empty-username').fadeIn(300);
+            nameError = true;
+        } else if (val.length < 3) {
+            $(this).css('border', '1px solid #f00');
+            $('.length-username').fadeIn(300);
+            nameError = true;
+        } else {
+            $(this).css('border', '1px solid #080');
+            nameError = false;
+        }
+    });
+
+    // ======================================
+    // Start Email Field
+    // ======================================
+    $('.email').blur(function () {
+        $('.empty-email, .invalid-email').hide();
+        $(this).css('border', '1px solid #ddd');
+        
+        const val = $(this).val().trim();
+
+        if (val === '') { 
+            $(this).css('border', '1px solid #f00');
+            $('.empty-email').fadeIn(300);
+            emailError = true;
+        } else if (!isValidEmail(val)) { // التحقق من الصيغة
+            $(this).css('border', '1px solid #f00');
+            $('.invalid-email').fadeIn(300);
+            emailError = true;
+        } else {
+            $(this).css('border', '1px solid #080');
+            emailError = false;
+        }
+    });
+
+    // ======================================
+    // Start Subject Field (جديد)
+    // ======================================
+    $('.subject').blur(function () {
+        $('.empty-subject').hide();
+        $(this).css('border', '1px solid #ddd');
+
+        if ($(this).val().trim() === '') {
+            $(this).css('border', '1px solid #f00');
+            $('.empty-subject').fadeIn(300);
+            subjectError = true;
+        } else {
+            $(this).css('border', '1px solid #080');
+            subjectError = false;
+        }
+    });
+
+    // ======================================
+    // Start Phone Field (اختياري)
+    // ======================================
+    $('.phone').blur(function () {
+        $('.len-phone').hide();
+        $(this).css('border', '1px solid #ddd');
+        
+        const phoneVal = $(this).val().trim();
+        
+        // 💡 الشرط: إذا كان الحقل ليس فارغاً، يجب أن يطابق الصيغة
+        if (phoneVal.length > 0) {
+            if (phoneVal.length !== 11 || !phoneVal.match(/^(010|011|012|015)[0-9]{8}$/)) {
+                $(this).css('border', '1px solid #f00');
+                $('.len-phone').fadeIn(300);
+                phoneError = true;
+            } else {
+                $(this).css('border', '1px solid #080');
+                phoneError = false;
+            }
+        } else {
+            // إذا كان فارغاً، فهو مقبول (Not required)
+            phoneError = false; 
+        }
+    });
+
+    // ======================================
+    // Start Message Field
+    // ======================================
+    $('.message').blur(function () {
+        $('.empty-message, .len-message').hide();
+        $(this).css('border', '1px solid #ddd');
+        
+        const val = $(this).val().trim();
+
+        if (val === '') {
+            $(this).css('border', '1px solid #f00');
+            $('.empty-message').fadeIn(300); // رسالة الخطأ الفارغ
+            msgError = true;
+        } else if (val.length < 10) {
+            $(this).css('border', '1px solid #f00');
+            $('.len-message').fadeIn(300); // رسالة الخطأ للطول
+            msgError = true;
+        } else {
+            $(this).css('border', '1px solid #080');
+            msgError = false;
+        }
+    });
+
+// ... (كود الـ Validation لكل حقل يبقى كما هو في الأعلى) ...
+
+
+    // ======================================
+    // Final Submission Check (AJAX Implementation)
+    // ======================================
+    $('.contact-form').submit(function (e) {
+        e.preventDefault(); // نمنع الإرسال التقليدي وإعادة تحميل الصفحة
+
+        // 1. تشغيل التحقق لجميع الحقول الإجبارية للتأكد من تحديث متغيرات الأخطاء
+        $('.username, .email, .subject, .message').blur();
+        $('.phone').blur();
+        
+        // إزالة رسائل النجاح/الخطأ السابقة لتجنب التكرار
+        $('.flash-message-container').remove(); 
+        
+        // 2. التحقق النهائي من أن جميع المتغيرات الإجبارية تساوي false
+        if( nameError === true || emailError === true || subjectError === true || msgError === true ) {
+            // عرض رسالة خطأ مُنسقة بدلاً من alert()
+            $(this).prepend('<div class="alert alert-warning text-center mb-4 flash-message-container">Please review and correct the fields marked in red.</div>');
+            return; // إيقاف الإرسال إذا فشل التحقق في الواجهة
+        }
+        
+        // 3. تجهيز النموذج للإرسال
+        const submitBtn = $('.submit-btn');
+        const form = $(this);
+        
+        // حالة التحميل (Loading State)
+        submitBtn.prop('disabled', true).find('span').text('Sending...'); 
+        submitBtn.find('i').removeClass('bi-send-fill').addClass('bi-hourglass-split'); // أيقونة التحميل
+
+        // 4. إرسال البيانات عبر AJAX
+        $.ajax({
+            type: form.attr('method'), 
+            url: form.attr('action'),
+            data: form.serialize(),
+            dataType: 'json', 
+
+            success: function (response) {
+                // 5. إعادة زر الإرسال لحالته الأصلية
+                submitBtn.prop('disabled', false).find('span').text('Send Message');
+                submitBtn.find('i').removeClass('bi-hourglass-split').addClass('bi-send-fill');
+            
+                if (response.success) {
+                    // النجاح: عرض رسالة النجاح ومسح النموذج
+                    form.prepend('<div class="alert alert-success text-center mb-4 flash-message-container">✅ ' + response.message + '</div>');
+                    form[0].reset(); 
+                    // إزالة الحدود (الخضراء أو الحمراء)
+                    $('.form-control').css('border', '1px solid #ddd'); 
+                } else {
+                    // فشل: عرض رسالة الخطأ (سواء كان خطأ DB أو Validation)
+                    form.prepend('<div class="alert alert-danger text-center mb-4 flash-message-container">❌ ' + response.message + '</div>');
+                    // إذا كان فشل Validation من Controller، فهذا الكود هو الذي يعرض رسالته
+                    
+                    // إذا أردت إظهار أخطاء الـ Validation من PHP (Controller) أسفل الحقول، ستضيف هنا منطق jQuery لتحليل response.errors
+                }
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                // 5. إعادة زر الإرسال لحالته الأصلية حتى لو فشل الاتصال
+                submitBtn.prop('disabled', false).find('span').text('Send Message');
+                submitBtn.find('i').removeClass('bi-hourglass-split').addClass('bi-send-fill');
+
+                // خطأ عام
+                form.prepend('<div class="alert alert-danger text-center mb-4 flash-message-container">An error occurred while connecting to the server. Please try again.</div>');
+            }
+        });
+    });
+});

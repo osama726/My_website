@@ -46,7 +46,21 @@
                     </a>
                 </div>
             </div>
-            
+        </div>
+
+        <div class="row gy-4 mb-5">
+            <div class="col-lg-4 col-md-6">
+                <div class="stat-card">
+                    <div class="stat-icon bg-info"><i class="bi bi-envelope-fill"></i></div>
+                    <div class="stat-content">
+                        <p class="stat-label">Unread Messages</p>
+                        <h3 class="stat-value text-danger"><?= $totalUnreadMessages ?? 0 ?></h3> 
+                    </div>
+                    <a href="<?= BASE_URL ?>?controller=dashboard&action=messages" class="btn-manage">
+                        View Messages <i class="bi bi-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
         </div>
 
         <div class="row justify-content-center">

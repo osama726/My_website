@@ -137,10 +137,10 @@
 
 
 /*--------------------------------------------------------------
-# Dashboard Projects Styling
+# global styles for dashboard sections
 --------------------------------------------------------------*/
 .dashboard-card {
-    background: #423d35;
+    /* background: var(--surface-color); */
     border-radius: 16px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
     padding: 20px 25px;
@@ -148,6 +148,8 @@
     transition: all 0.3s ease;
     margin-top: -50px;
 }
+
+
 .dashboard-card:hover {
     transform: translateY(-3px);
     box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
@@ -158,6 +160,7 @@
         color-mix(in srgb, var(--default-color), transparent 90%);
     margin-bottom: 20px;
 }
+
 .dashboard-card h4 {
     font-size: 1.1rem;
     color: var(--heading-color);
@@ -174,6 +177,7 @@
     color: var(--heading-color);
     font-size: 0.9rem;
 }
+
 .custom-table tbody tr {
     transition: background 0.2s;
 }
@@ -186,7 +190,7 @@
     border-top: 1px solid
         color-mix(in srgb, var(--default-color), transparent 90%);
     color: var(--default-color);
-    font-size: 0. nine rem;
+    font-size: 0.9rem;
 }
 
 .table-thumb {
@@ -200,19 +204,29 @@
     color: var(--accent-color);
     font-size: 1.5rem;
 }
+.action-buttons-group {
+    display: flex;
+    gap: 5px;
+    align-items: center;
+    justify-content: center;
+}
 .btn-icon {
-    display: block;
     padding: 6px 8px;
     border-radius: 6px;
     text-decoration: none;
-    margin: 5px;
     transition: all 0.3s ease;
+    display: inline-flex; 
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
 }
 .btn-icon.edit {
+    /* display: block; */
     background: color-mix(in srgb, var(--accent-color), transparent 80%);
     color: var(--contrast-color);
 }
 .btn-icon.delete {
+    /* display: block; */
     background: color-mix(in srgb, #ff4d4f, transparent 70%);
     color: #fff;
 }
@@ -245,7 +259,6 @@
     border-radius: 8px;
 }
 .btn-submit {
-    /* background: var(--accent-color); */
     background: var(--accent-color);
     border: none;
     border-radius: 50px;
@@ -258,4 +271,64 @@
 .btn-submit:hover {
     background: color-mix(in srgb, var(--accent-color), black 10%);
     transform: translateY(-2px);
+}
+
+
+/*--------------------------------------------------------------
+# Dashboard Messages Styling
+--------------------------------------------------------------*/
+
+/* تلوين الصفوف غير المقروءة */
+.custom-dashboard-table .unread-message-row {
+    background-color: color-mix(in srgb, var(--accent-color), transparent 97%); 
+    font-weight: 600;
+}
+.custom-dashboard-table .unread-message-row td {
+    color: var(--heading-color); 
+}
+
+/* حالة الرسالة (NEW/Read) */
+.message-status.bg-warning {
+    background-color: #ffc107 !important; /* أصفر للجديد */
+    color: #333;
+}
+.message-status.bg-success {
+    background-color: #198754 !important; /* أخضر للمقروء */
+}
+
+/* تنسيق زر تمييز كمقروء (Read) */
+.btn-icon.read {
+    background: #0dcaf0; /* لون أزرق سماوي للإنفو */
+    color: white;
+}
+.btn-icon.read:hover {
+    background: #008cba;
+}
+
+/* تنسيق رابط العنوان في الجدول */
+.custom-dashboard-table .subject-link {
+    color: var(--heading-color);
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.custom-dashboard-table .subject-link:hover {
+    color: var(--accent-color);
+    text-decoration: underline;
+}
+
+/* تفاصيل الرسالة عند التوسع */
+.message-details-row {
+    background: color-mix(in srgb, var(--surface-color), #f9f9f9 5%);
+    border-top: 2px solid var(--accent-color);
+    padding: 15px;
+}
+
+.message-content-box {
+    text-align: left;
+    white-space: pre-wrap; 
+}
+
+.message-content-box strong {
+    color: var(--accent-color);
 }

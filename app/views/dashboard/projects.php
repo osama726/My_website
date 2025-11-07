@@ -57,8 +57,14 @@
                                                 <?php endif; ?>
                                             </td>
                                             <td>
-                                                <a href="<?= BASE_URL ?>?controller=dashboard&action=projects&id=<?= $p['id'] ?>" class="btn-icon edit"><i class="bi bi-pencil-fill"></i></a>
-                                                <a href="<?= BASE_URL ?>?controller=dashboard&action=projects&delete=<?= $p['id'] ?>" onclick="return confirm('Delete this project?')" class="btn-icon delete"><i class="bi bi-trash3-fill"></i></a>
+                                                <div class="action-buttons-group"> 
+                                                    <a href="<?= BASE_URL ?>?controller=dashboard&action=projects&id=<?= $p['id'] ?>" class="btn-icon edit" title="Edit">
+                                                        <i class="bi bi-pencil-fill"></i>
+                                                    </a>
+                                                    <a href="<?= BASE_URL ?>?controller=dashboard&action=projects&delete=<?= $p['id'] ?>" onclick="return confirm('Delete this project?')" class="btn-icon delete" title="Delete">
+                                                        <i class="bi bi-trash3-fill"></i>
+                                                    </a>
+                                                </div>
                                             </td>
                                         </tr>
                                     <?php endforeach; ?>

@@ -34,17 +34,10 @@
     <?php include 'header.php'; ?>
 
     <main>
-        <!-- Flash messages (مثال: تسجيل ناجح، خطأ في الفاليديشن...) -->
-        <?php if (!empty($_SESSION['flash'])): ?>
-            <div class="flash">
-                <?= htmlspecialchars($_SESSION['flash']); ?>
-            </div>
-            <?php unset($_SESSION['flash']); // نعرض الرسالة مرة واحدة فقط ?>
-        <?php endif; ?>
 
         <!-- هنا يُحمّل محتوى الصفحة -->
-
         <?php require $viewPath; ?>
+
     </main>
 
     <?php include 'footer.php'; ?>
@@ -66,6 +59,9 @@
     <script src="<?= BASE_URL ?>assets/vendor/imagesloaded/imagesloaded.pkgd.min.js"></script>
     <script src="<?= BASE_URL ?>assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
     <script src="<?= BASE_URL ?>assets/vendor/swiper/swiper-bundle.min.js"></script>
+
+    <!-- jQuery JS File -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> 
 
     <!-- Main JS File -->
     <script src="<?= BASE_URL ?>assets/js/main.js"></script>

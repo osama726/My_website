@@ -16,6 +16,7 @@
                 <li><a href="<?= BASE_URL ?>#skills">Skills</a></li>
                 <!-- <li><a href="<?= BASE_URL ?>?controller=projects&action=index">Projects</a></li> -->
                 <li><a href="<?= BASE_URL ?>#projects">Projects</a></li>
+                <li><a href="<?= BASE_URL ?>#contact">Contact</a></li>
                 <?php if (!empty($user)): ?>
                     <?php if (!empty($user['role']) && $user['role'] === 'admin'): ?>
                         <a class="btn-log" href="<?= BASE_URL ?>?controller=dashboard&action=index">Dashboard</a>

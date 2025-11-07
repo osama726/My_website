@@ -20,6 +20,7 @@ class HomeController extends Controller {
         // للحصول على قائمة المهارات
         $skills = $skillModel->findAll('id', 'DESC');
 
+        
         $aboutData = defined('ABOUT_ME_DATA') ? ABOUT_ME_DATA : [];
 
         $this->view('home/index', [

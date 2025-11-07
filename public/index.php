@@ -2,6 +2,10 @@
     // public/index.php
     require_once __DIR__ . '/../app/config/config.php';
 
+    //  تضمين ملف autoload الذي أنشأه Composer
+    require __DIR__ . '/../vendor/autoload.php';
+
+
     function renderError($code = 404, $title = 'Error', $message = null) {
         if (session_status() === PHP_SESSION_NONE) {
             session_start();
@@ -9,22 +13,26 @@
 
         http_response_code($code);
 
-        // نمرر البيانات إلى صفحة الخطأ الموحدة
+        // 💡 المتغيرات الضرورية لصفحة الخطأ
         $errorData = [
             'code' => $code,
-            'title' => $title,
-            'message' => $message ?? 'An unexpected error occurred.'
+            'title' => $title, // سيتم استخدامه في <title> و <h2>
+            'message' => $message ?? 'An unexpected error occurred.',
+            
+            // 💡 إضافة المتغير الضروري الذي يتوقعه layouts/main.php
+            'viewPath' => __DIR__ . '/../app/views/errors/error.php',
+            
+            // 💡 يمكن إضافة متغيرات أخرى يحتاجها الـLayout
+            // 'pageScripts' => null, 
         ];
 
         // نمرر البيانات إلى الـ layout
         extract($errorData);
 
         // نعرض صفحة الخطأ من خلال layout العام
-        $viewPath = __DIR__ . '/../app/views/errors/error.php';
         require __DIR__ . '/../app/views/layouts/main.php';
         exit;
     }
-
     // جلب controller و action من الرابط
     $controller = $_GET['controller'] ?? 'home';
     $action = $_GET['action'] ?? 'index';

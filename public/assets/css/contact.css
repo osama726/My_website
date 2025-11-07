@@ -1,0 +1,271 @@
+/* =========================
+Contact page specific styles
+========================= */
+.contact.section {
+    padding: 70px 0;
+    background: transparent;
+}
+
+.contact .contact-form-card {
+    background: #231f1f;
+    border: 1px solid color-mix(in srgb, var(--default-color), transparent 90%);
+    padding: 28px;
+    border-radius: 14px;
+    box-shadow: 0 10px 30px color-mix(in srgb, var(--accent-color), transparent 80%);
+    max-width: 720px;
+    margin: 0 auto; /* center the card */
+}
+
+.contact .contact-form-card .form-header {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+    margin-bottom: 1rem;
+    justify-content: center; /* center header content */
+    text-align: center;
+}
+
+.contact .contact-form-card .form-header > div {
+    max-width: 520px;
+}
+
+/* small tweak to keep inputs full-width and balanced on mobile */
+@media (max-width: 576px) {
+    .contact .contact-form-card {
+        padding: 18px;
+    }
+    .contact .contact-form-card .form-header {
+        gap: 12px;
+    }
+    .contact .contact-form-card .form-header .header-icon {
+        width: 48px;
+        height: 48px;
+    }
+    .contact  .form-control {
+        padding: 10px 12px;
+    }
+}
+
+/* Form controls */
+.contact .form-control {
+    background: var(--surface-color);
+    border: 1px solid color-mix(in srgb, var(--default-color), transparent 80%);
+    padding: 12px 14px;
+    border-radius: 10px;
+    color: var(--default-color);
+}
+
+.contact .form-control::placeholder {
+    color: color-mix(in srgb, var(--default-color), transparent 60%);
+}
+
+.contact  .form-control:focus {
+    border-color: var(--accent-color);
+    box-shadow: 0 6px 20px
+        color-mix(in srgb, var(--accent-color), transparent 92%);
+}
+
+.contact  .loading,
+.contact  .error-message,
+.contact  .sent-message {
+    display: none;
+    margin-bottom: 12px;
+    font-size: 0.95rem;
+}
+
+.contact  .sent-message {
+    display: none;
+    color: var(--accent-color);
+}
+
+/* Submit button */
+.submit-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--accent-color);
+    color: var(--contrast-color);
+    border: none;
+    padding: 10px 18px;
+    border-radius: 10px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+
+.submit-btn i {
+    font-size: 1rem;
+}
+.submit-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 30px
+        color-mix(in srgb, var(--accent-color), transparent 80%);
+}
+
+/* Right column / info area */
+.contact .contact-info-area {
+    padding-left: 28px;
+}
+
+.contact .info-header h3 {
+    margin: 0 0 8px 0;
+    color: var(--heading-color);
+    font-size: 1.35rem;
+}
+
+.contact .info-header p {
+    margin: 0 0 18px 0;
+    color: color-mix(in srgb, var(--default-color), transparent 40%);
+}
+
+/* Method cards */
+.contact .method-card {
+    display: flex;
+    gap: 16px;
+    background: var(--surface-color);
+    border-radius: 12px;
+    padding: 14px;
+    margin-bottom: 12px;
+    align-items: center;
+    border: 1px solid color-mix(in srgb, var(--default-color), transparent 90%);
+    box-shadow: 0 8px 20px rgba(13, 20, 40, 0.03);
+}
+
+.contact .method-card .card-icon {
+    width: 56px;
+    height: 56px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: color-mix(in srgb, var(--accent-color), transparent 90%);
+    color: var(--accent-color);
+    font-size: 1.25rem;
+    flex-shrink: 0;
+}
+
+.contact .method-card h5 {
+    margin: 0 0 4px 0;
+    color: var(--heading-color);
+    font-size: 1rem;
+}
+
+.contact .method-card p {
+    margin: 0;
+    color: color-mix(in srgb, var(--default-color), transparent 40%);
+    font-size: 0.95rem;
+}
+
+.contact .response-time {
+    display: block;
+    font-size: 0.85rem;
+    color: color-mix(in srgb, var(--default-color), transparent 50%);
+    margin-top: 6px;
+}
+
+/* Additional info & social */
+.contact .info-stats {
+    display: flex;
+    gap: 12px;
+    margin: 16px 0;
+    flex-wrap: wrap;
+}
+
+.contact .info-stats .stat-item {
+    background: var(--surface-color);
+    padding: 10px 14px;
+    border-radius: 10px;
+    border: 1px solid color-mix(in srgb, var(--default-color), transparent 90%);
+    min-width: 110px;
+    text-align: center;
+}
+
+.contact .info-stats .stat-number {
+    font-weight: 700;
+    color: var(--heading-color);
+    font-size: 1.1rem;
+}
+
+.contact .info-stats .stat-label {
+    font-size: 0.85rem;
+    color: color-mix(in srgb, var(--default-color), transparent 50%);
+}
+
+/* Social links */
+.contact .social-links {
+    display: flex;
+    gap: 10px;
+    margin-top: 12px;
+}
+
+.contact .social-links .social-link {
+    width: 40px;
+    height: 40px;
+    border-radius: 8px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: color-mix(in srgb, var(--default-color), transparent 92%);
+    color: var(--default-color);
+    transition: all 0.18s ease;
+}
+
+.contact .social-links .social-link:hover {
+    background: var(--accent-color);
+    color: var(--contrast-color);
+    transform: translateY(-3px);
+}
+
+.custom-error {
+    display: none; /* إخفاؤها افتراضياً */
+    color: #ff4d4f; /* لون أحمر واضح */
+    font-size: 0.85rem;
+    margin-top: 5px;
+    font-weight: 500;
+}
+
+/* Responsive adjustments */
+@media (max-width: 992px) {
+    .contact.section {
+        padding: 50px 0;
+    }
+    .contact .contact-info-area {
+        padding-left: 0;
+        margin-top: 20px;
+    }
+    .contact .method-card {
+        align-items: flex-start;
+    }
+    .contact .info-stats {
+        gap: 8px;
+    }
+}
+
+@media (max-width: 576px) {
+    .contact .contact-form-card {
+        padding: 18px;
+    }
+    .contact .header-icon {
+        width: 48px;
+        height: 48px;
+        font-size: 1.1rem;
+    }
+    .contact .method-card {
+        padding: 12px;
+        gap: 12px;
+    }
+    .contact .method-card .card-icon {
+        width: 48px;
+        height: 48px;
+        font-size: 1.05rem;
+    }
+    .contact .info-stats .stat-item {
+        min-width: 90px;
+        padding: 8px;
+    }
+    .contact .social-links .social-link {
+        width: 36px;
+        height: 36px;
+        font-size: 0.95rem;
+    }
+}

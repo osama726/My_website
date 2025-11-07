@@ -24,3 +24,4 @@
 	include __DIR__ . '/../about/index.php';
 	include __DIR__ . '/../skills/index.php';
 	include __DIR__ . '/../projects/index.php';
+	include __DIR__ . '/../contact/contact.php';
