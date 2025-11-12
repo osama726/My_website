@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="public/uploads/logo-dark.png" alt="Portfolio Logo" width="150"/>
+  <img src="public/uploads/dark_logo.png" alt="Portfolio Logo" width="150"/>
 </p>
 
 <h1 align="center">PHP MVC Portfolio CMS</h1>
