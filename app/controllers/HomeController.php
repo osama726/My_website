@@ -21,7 +21,9 @@ class HomeController extends Controller {
         $skills = $skillModel->findAll('id', 'DESC');
 
         
-        $aboutData = defined('ABOUT_ME_DATA') ? ABOUT_ME_DATA : [];
+        // $aboutData = defined('ABOUT_ME_DATA') ? ABOUT_ME_DATA : [];
+        $settingsModel = $this->model('Settings');
+        $aboutData = $settingsModel->getGeneralSettings();
 
         $this->view('home/index', [
             'title' => 'Welcome to My Portfolio',
@@ -29,7 +31,7 @@ class HomeController extends Controller {
             'projects' => $projects,
             'skills' => $skills,
             'about' => $aboutData,
-            'showAll' => $showAll
+            'showAll' => $showAll,
         ]);
     }
 }

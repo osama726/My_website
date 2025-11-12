@@ -7,21 +7,24 @@
         </div>
 
         <?php if (empty($skills)): ?>
-            <div class="text-center p-5 border rounded-3 skill-empty-state">
-                <i class="bi bi-tools display-4 mb-3"></i>
-                <h3>No Skills Added Yet!</h3>
-                <p>Or perhaps the admin is making some changes</p>
+            <?php else: ?>
+            
+            <div class="scroll-controls text-center mb-3">
+                <button id="scroll-left" class="btn-scroll me-2" aria-label="Scroll Left"><i class="bi bi-arrow-left"></i></button>
+                <button id="scroll-right" class="btn-scroll" aria-label="Scroll Right"><i class="bi bi-arrow-right"></i></button>
             </div>
-        <?php else: ?>
-            <div class="skills-board">
-                <?php foreach ($skills as $skill): ?> 
-                    <div class="skill-item" data-aos="zoom-in" data-aos-delay="<?= $index * 100 ?>">
-                        <div class="icon-circle" >
-                            <i class="<?= htmlspecialchars($skill['icon'] ?? 'bi bi-gear') ?>"></i>
+
+            <div class="skills-horizontal-wrapper">
+                <div class="skills-board">
+                    <?php foreach ($skills as $skill): ?> 
+                        <div class="skill-item" data-aos="zoom-in" data-aos-delay="<?= $index * 100 ?>">
+                            <div class="icon-circle" >
+                                <i class="<?= htmlspecialchars($skill['icon'] ?? 'bi bi-gear') ?>"></i>
+                            </div>
+                            <span><?= htmlspecialchars($skill['name']) ?></span>
                         </div>
-                        <span><?= htmlspecialchars($skill['name']) ?></span>
-                    </div>
-                <?php endforeach; ?>
+                    <?php endforeach; ?>
+                </div>
             </div>
         <?php endif; ?>
     </div>

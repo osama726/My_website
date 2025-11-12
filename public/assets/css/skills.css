@@ -86,3 +86,71 @@
     font-size: 3.5rem; /* لتكون أكبر قليلاً */
 }
 
+
+
+/* =============== Skills Section =============== */
+/* ... (كود skills-board يبقى كما هو، فهو يحدد الـGrid) ... */
+
+/* 💡 الحاوية التي تحدد الارتفاع وتفعل التمرير */
+.skills .skills-horizontal-wrapper {
+    max-height: 100%; /* 💡 تثبيت الارتفاع الأقصى للبوكس (يمكنك تعديله) */
+    overflow-x: auto;
+    overflow-y: hidden;
+    border-radius: 20px;
+    /* إزالة شريط التمرير الافتراضي في بعض المتصفحات لتحسين الشكل */
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none;  /* IE and Edge */
+}
+.skills .skills-horizontal-wrapper::-webkit-scrollbar {
+    width: 0; /* Chrome, Safari, Opera */
+}
+
+.skills .skills-board {
+    background: var(--surface-color);
+    padding: 40px;
+    border-radius: 20px;
+    
+    /* 🛑 التعديل الرئيسي: Grid لا يعمل مع التمرير الأفقي المفتوح */
+    /* سنستخدم Flexbox بدلاً من Grid لإجبار العناصر على التراص أفقياً */
+    display: flex; /* 💡 تغيير العرض إلى Flexbox */
+    flex-wrap: nowrap; /* 💡 منع العناصر من النزول إلى السطر الجديد */
+    
+    /* نقوم بضبط مساحة العناصر يدوياً */
+    gap: 30px; /* المسافة بين كل مهارة وأخرى */
+    
+    /* يجب أن يكون العرض أوسع من الحاوية الأم لتمكين التمرير */
+    width: fit-content; 
+    min-width: 100%; /* لضمان ألا يكون البوكس أصغر من عرضه */
+    
+    /* ... (بقية التنسيقات مثل box-shadow تبقى كما هي) ... */
+}
+
+/* 3. تعديل العناصر الفردية للتحجيم */
+.skills .skill-item {
+    /* كل عنصر يجب أن يأخذ عرضاً ثابتاً لمنع التمدد */
+    flex-shrink: 0; /* منع العناصر من الانكماش */
+    width: 120px; /* 💡 عرض ثابت لكل عنصر مهارة */
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+/* 💡 تنسيق أزرار التحكم في التمرير */
+.skills .scroll-controls .btn-scroll {
+    background: var(--surface-color);
+    border: 1px solid color-mix(in srgb, var(--default-color), transparent 80%);
+    color: var(--accent-color);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 1.1rem;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.skills .scroll-controls .btn-scroll:hover {
+    background: var(--accent-color);
+    color: var(--contrast-color);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(var(--accent-rgb), 0.3);
+}

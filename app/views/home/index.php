@@ -2,6 +2,8 @@
 <section id="hero" class="hero section dark-background">
 
 		<img src="<?= UPLOAD_DIR ?>me2.jpeg" alt="" data-aos="fade-in">
+		<!-- <img src="<?= UPLOAD_DIR ?>title.png" alt="" data-aos="fade-in"> -->
+		<!-- <div class="img"></div> -->
 		
 		<div class="container" data-aos="fade-up" data-aos-delay="100">
 			<div class="row justify-content-center">

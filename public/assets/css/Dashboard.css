@@ -170,7 +170,7 @@
 /* ===== Table Style ===== */
 .custom-table {
     width: 100%;
-    background-color: #423d35;
+    background-color: var(--bs-dark);
 }
 .custom-table thead {
     background: color-mix(in srgb, var(--accent-color), transparent 85%);

@@ -6,7 +6,8 @@
 <header id="header" class="header d-flex align-items-center fixed-top">
     <div class="container-fluid container-xl position-relative d-flex align-items-center">
         <a href="index.php" class="logo d-flex align-items-center me-auto">
-            <img src="<?= UPLOAD_DIR ?>Logo_osama2.png">
+            <img src="<?= UPLOAD_DIR ?>dark_logo.png" class="logo-dark">
+            <img src="<?= UPLOAD_DIR ?>light_logo.png" class="logo-light">
         </a>
         <nav id="navmenu" class="navmenu">
             <ul>
@@ -31,6 +32,10 @@
                 <?php endif; ?>
 
                 <!-- <a class="btn-getstarted" href="#about">Get Started</a> -->
+                <button id="theme-toggle-btn" class="btn btn-sm btn-outline-secondary theme-toggle-btn" title="Toggle Dark/Light Mode">
+                    <i class="bi bi-sun-fill theme-icon-sun"></i> 
+                    <i class="bi bi-moon-fill theme-icon-moon"></i>
+                </button>
             </ul>
             <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
         </nav>

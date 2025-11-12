@@ -28,7 +28,7 @@ class DashboardController extends Controller {
         ]);
     }
 
-    // 🧩 إدارة المشاريع (كلها في صفحة واحدة)
+    // add project management methods:
     public function projects() {
         $this->authorizeAdmin();
         $projectModel = $this->model('Project');
@@ -177,7 +177,7 @@ class DashboardController extends Controller {
 
 
     // add USER management methods here
-        public function users() {
+    public function users() {
         $this->authorizeAdmin(); // حماية الأدمن فقط
 
         $userModel = $this->model('User');
@@ -281,6 +281,163 @@ class DashboardController extends Controller {
         $this->view('dashboard/messages', [
             'title' => 'Manage Messages',
             'messages' => $messages
+        ]);
+    }
+
+    // general settings method
+    public function settings() {
+        // 1. التحقق من صلاحيات المدير
+        $this->authorizeAdmin();
+        
+        $settingsModel = $this->model('Settings');
+        $flashMessage = '';
+
+        // 2. معالجة طلب POST (إرسال النموذج)
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            
+            // جلب البيانات الأساسية
+        $fullName = trim($_POST['full_name'] ?? '');
+        $bioText = trim($_POST['bio_text'] ?? '');
+        $cvLink = trim($_POST['current_cv_path'] ?? '');
+        
+        $currentImage = trim($_POST['current_profile_image'] ?? ''); 
+        
+        // 💡 جلب البيانات الجديدة
+        $yearsOfExperience = (int)$_POST['years_of_experience'];
+        $currentJobStatus = trim($_POST['current_job_status'] ?? '');
+        // يتم تحويل قيمة checkbox (التي تأتي إما 'on' أو غير موجودة) إلى 1 أو 0
+        $isAvailableForWork = isset($_POST['is_available_for_work']) ? 1 : 0; 
+        
+        $profileImageName = $currentImage; // الصورة الافتراضية هي القديمة
+
+        $systemCvDir = __DIR__ . '/../../public/uploads/'; 
+
+        if (isset($_FILES['cv_file']) && $_FILES['cv_file']['error'] === UPLOAD_ERR_OK) {
+            
+            if (!is_dir($systemCvDir)) {
+                mkdir($systemCvDir, 0775, true);
+            }
+            
+            $fileType = strtolower(pathinfo($_FILES['cv_file']['name'], PATHINFO_EXTENSION));
+            
+            if ($fileType !== "pdf") {
+                $flashMessage = "⚠️ Only PDF files are allowed for the CV.";
+            } else {
+                $newFileName = 'cv-' . time() . '.' . $fileType;
+                $targetSystemFile = $systemCvDir . $newFileName;
+                
+                if (move_uploaded_file($_FILES['cv_file']['tmp_name'], $targetSystemFile)) {
+                    
+                    // 🗑️ حذف الملف القديم (قبل تحديث DB)
+                    if (!empty($cvLink)) {
+                        // يجب تحويل مسار الويب المخزن إلى مسار نظامي للحذف
+                        $oldSystemPath = $systemCvDir . $cvLink; 
+                        if (file_exists($oldSystemPath)) {
+                            unlink($oldSystemPath); 
+                        }
+                    }
+                    
+                    // ✅ تخزين المسار الجديد في DB (مسار الويب)
+                    $cvLink = $newFileName;
+                    
+                } else {
+                    $flashMessage = "❌ Error uploading CV file. Check directory permissions (775).";
+                }
+            }
+        }
+
+
+        // 💡 معالجة رفع صورة جديدة
+        if (isset($_FILES['profile_image']) && $_FILES['profile_image']['error'] === UPLOAD_ERR_OK) {
+            
+            // 🛑 1. تعريف مسارات الرفع:
+            // المسار على نظام التشغيل: يتم الخروج من (app/controllers) إلى (ROOT) ثم الدخول إلى (assets/uploads)
+            $systemUploadDir = __DIR__ . '/../../public/uploads/'; 
+            
+            
+            // تأكد أن هذا المجلد موجود وقابل للكتابة (chmod 775)
+            if (!is_dir($systemUploadDir)) {
+                mkdir($systemUploadDir, 0775, true);
+            }
+            
+            $imageFileType = strtolower(pathinfo($_FILES['profile_image']['name'], PATHINFO_EXTENSION));
+            $newFileName = 'profile-' . time() . '.' . $imageFileType;
+            $targetSystemFile = $systemUploadDir . $newFileName; // المسار الكامل للنظام
+            
+            // 2. التحقق من نوع الملف وتنفيذ الرفع
+            if ($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg") {
+                $flashMessage = "⚠️ Sorry, only JPG, JPEG, & PNG files are allowed for the profile image.";
+            } elseif (move_uploaded_file($_FILES['profile_image']['tmp_name'], $targetSystemFile)) {
+                
+                // ✅ تم الرفع بنجاح: الآن نخزن مسار الـHTML في قاعدة البيانات
+                $profileImageName = $newFileName; 
+                
+                // 🗑️ حذف الصورة القديمة (للتنظيف)
+                // إذا كان هناك مسار صورة قديم محفوظ في الـDB
+                if (!empty($currentImage)) {
+                    // نُحوِّل المسار المخزن في الـDB (مسار HTML) إلى مسار نظامي للحذف
+                    $oldSystemPath = $systemUploadDir . $currentImage;
+                    if (file_exists($oldSystemPath)) {
+                        // نُفعّل الحذف إذا لم تكن الصورة الافتراضية
+                        if ($currentImage !== 'default.jpg') 
+                            unlink($oldSystemPath); 
+                    }
+                }
+                
+            } else {
+                $flashMessage = "⚠️ Error uploading the new profile image. Check directory permissions (775).";
+            }
+        }
+
+
+            // 3. تحديث البيانات في قاعدة البيانات
+        if (empty($flashMessage)) { 
+                
+            // 🛑 استخدم try-catch هنا لكشف الخطأ الحقيقي
+            try {
+                $isUpdated = $settingsModel->updateGeneralSettings(
+                    $fullName, 
+                    $bioText, 
+                    $cvLink, // هذا الآن يحمل مسار ملف الـCV
+                    $profileImageName,
+                    $yearsOfExperience,
+                    $currentJobStatus,
+                    $isAvailableForWork
+                );
+
+                if ($isUpdated) {
+                    $_SESSION['flash'] = "✅ General settings updated successfully.";
+                } else {
+                    // لو الـUpdate لم يؤثر على أي صف (مثلاً ID=1 غير موجود)، أو فشل بدون إطلاق استثناء
+                    $_SESSION['flash'] = "❌ Failed to update settings. ID=1 row not found or nothing changed.";
+                }
+            } catch (PDOException $e) {
+                // 💡 تم اكتشاف خطأ قاعدة بيانات حقيقي!
+                // اعرض رسالة الخطأ الحقيقية للمطور:
+                $_SESSION['flash'] = "❌ Database Error: " . htmlspecialchars($e->getMessage());
+            }
+
+            } else {
+                $_SESSION['flash'] = $flashMessage; // عرض خطأ الرفع (لو كان هناك خطأ في الرفع)
+            }
+            
+            // 4. إعادة التوجيه
+            header("Location: " . BASE_URL . "?controller=dashboard&action=settings");
+            exit;
+        }
+
+        // 5. عرض الإعدادات الحالية
+        $currentSettings = $settingsModel->getGeneralSettings();
+        
+        // إذا لم يكن هناك صف (ID=1) في الجدول، أظهر رسالة خطأ أو قم بإنشاء صف افتراضي يدوياً في البداية.
+        if (!$currentSettings) {
+            $_SESSION['flash'] = "❌ Settings row not found. Please insert one row with ID=1 into the 'settings' table manually.";
+            $currentSettings = []; 
+        }
+
+        $this->view('dashboard/settings', [
+            'title' => 'General Settings',
+            'settings' => $currentSettings
         ]);
     }
 

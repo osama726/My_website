@@ -46,9 +46,11 @@
                     </a>
                 </div>
             </div>
+
         </div>
 
         <div class="row gy-4 mb-5">
+
             <div class="col-lg-4 col-md-6">
                 <div class="stat-card">
                     <div class="stat-icon bg-info"><i class="bi bi-envelope-fill"></i></div>
@@ -61,7 +63,23 @@
                     </a>
                 </div>
             </div>
+
+            <div class="col-lg-4 col-md-6">
+                <div class="stat-card">
+                    <div class="stat-icon bg-secondary"><i class="bi bi-sliders"></i></div>
+                    <div class="stat-content">
+                        <p class="stat-label">General Management</p>
+                        <h3 class="stat-value">Settings</h3> 
+                    </div>
+                    <a href="<?= BASE_URL ?>?controller=dashboard&action=settings" class="btn-manage">
+                        Edit About & Info <i class="bi bi-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+
         </div>
+
+
 
         <div class="row justify-content-center">
             <div class="col-lg-6">
@@ -69,7 +87,6 @@
                     <h4>User Profile & Actions</h4>
                     <ul class="list-unstyled mt-3 mb-4">
                         <li><i class="bi bi-envelope-fill"></i> <strong>Email:</strong> <?= htmlspecialchars($user['email']) ?></li>
-                        <li><i class="bi bi-phone-fill"></i> <strong>Phone:</strong> <?= htmlspecialchars($user['phone'] ?? '—') ?></li>
                     </ul>
                     <a href="<?= BASE_URL ?>" class="btn btn-outline-secondary me-2">
                         <i class="bi bi-house-door-fill"></i> View Website

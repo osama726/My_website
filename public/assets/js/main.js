@@ -9,6 +9,48 @@
 (function() {
   "use strict";
 
+
+  /* * Dark and Light Mode Toggle - Final Version
+  */
+  document.addEventListener('DOMContentLoaded', () => {
+      const themeToggleBtn = document.querySelector('#theme-toggle-btn');
+      const storageKey = 'themePreference';
+      const htmlElement = document.documentElement; // استهداف وسم <html>
+
+      // 1. قراءة التفضيل المخزن وتطبيقه عند تحميل الصفحة
+      const savedTheme = localStorage.getItem(storageKey);
+      
+      // إذا لم يكن هناك تفضيل محفوظ، استخدم تفضيل النظام (Dark/Light) كإعداد افتراضي
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      const initialTheme = savedTheme || (prefersDark ? 'dark' : 'light');
+      
+      htmlElement.setAttribute('data-theme', initialTheme);
+
+      // 2. معالج حدث النقر
+      if (themeToggleBtn) { // التأكد من وجود الزر قبل إضافة الحدث
+          themeToggleBtn.addEventListener('click', () => {
+              let currentTheme = htmlElement.getAttribute('data-theme');
+              let newTheme;
+
+              // تحديد الثيم الجديد
+              if (currentTheme === 'dark' || currentTheme === 'undefined') {
+                  newTheme = 'light';
+              } else {
+                  newTheme = 'dark';
+              }
+
+              // التبديل وتحديث التخزين
+              htmlElement.setAttribute('data-theme', newTheme);
+              localStorage.setItem(storageKey, newTheme);
+              
+              // 💡 ملاحظة: لا حاجة لاستدعاء دالة updateToggleIcon() هنا،
+              // لأن الأيقونات يتم تبديلها تلقائيًا بواسطة الـCSS الذي أضفناه سابقًا
+          });
+      }
+  });
+
+
+  
   /**
    * Apply .scrolled class to the body as the page is scrolled down
    */
@@ -228,6 +270,35 @@
 
 })();
 
+/* Skills Section Scroll Buttons JS File */
+document.addEventListener('DOMContentLoaded', () => {
+    const scrollWrapper = document.querySelector('.skills-horizontal-wrapper');
+    const scrollLeftBtn = document.querySelector('#scroll-left');
+    const scrollRightBtn = document.querySelector('#scroll-right');
+    
+    // قيمة التمرير في كل ضغطة (مثلاً 300 بكسل)
+    const scrollDistance = 300; 
+
+    if (scrollWrapper && scrollLeftBtn && scrollRightBtn) {
+        
+        // 💡 دالة التمرير لليمين
+        scrollRightBtn.addEventListener('click', () => {
+            scrollWrapper.scrollBy({ 
+                left: scrollDistance, // تغيير 'top' إلى 'left'
+                behavior: 'smooth' 
+            });
+        });
+        
+        // 💡 دالة التمرير لليسار
+        scrollLeftBtn.addEventListener('click', () => {
+            scrollWrapper.scrollBy({ 
+                left: -scrollDistance, // تغيير 'top' إلى 'left' ووضع علامة (-)
+                behavior: 'smooth' 
+            });
+        });
+    }
+});
+
 
 /* Validation Contact Form JS File */
 /* global $, alert, console */
@@ -411,7 +482,7 @@ $(function () {
                     $('.form-control').css('border', '1px solid #ddd'); 
                 } else {
                     // فشل: عرض رسالة الخطأ (سواء كان خطأ DB أو Validation)
-                    form.prepend('<div class="alert alert-danger text-center mb-4 flash-message-container">❌ ' + response.message + '</div>');
+                    form.prepend('<div class="alert alert-danger text-center mb-4 flash-message-container"> ' + response.message + '</div>');
                     // إذا كان فشل Validation من Controller، فهذا الكود هو الذي يعرض رسالته
                     
                     // إذا أردت إظهار أخطاء الـ Validation من PHP (Controller) أسفل الحقول، ستضيف هنا منطق jQuery لتحليل response.errors

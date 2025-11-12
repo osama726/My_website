@@ -5,7 +5,7 @@
     $redirectUrl = BASE_URL . '?controller=dashboard&action=messages';
 ?>
 
-<section class="dashboard-section container py-5">
+<section class="dashboard-section container py-5 mt-5">
 
     <h1 class="mb-5 dashboard-title"><i class="bi bi-chat-left-dots-fill me-2"></i> <?= htmlspecialchars($title) ?></h1>
 

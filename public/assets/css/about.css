@@ -72,11 +72,23 @@
     right: 8px;
     width: 24px;
     height: 24px;
-    background: #10b981;
+    /* background: #10b981; */
     border: 4px solid var(--surface-color);
     border-radius: 50%;
     animation: pulse 2s infinite;
 }
+
+
+/* اللون الأخضر للمتاح */
+.profile-card .profile-avatar .status-indicator.status-available {
+    background-color: #28a745; /* أخضر Success */
+}
+
+/* اللون الأحمر للمشغول */
+.profile-card .profile-avatar .status-indicator.status-busy {
+    background-color: #dc3545; /* أحمر Danger */
+}
+
 
 .about .profile-card .profile-header h3 {
     font-size: 24px;
@@ -91,54 +103,6 @@
     color: var(--accent-color);
     font-weight: 500;
     margin-bottom: 16px;
-}
-
-.about .profile-card .profile-header .rating {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 4px;
-    margin-top: 12px;
-}
-
-.about .profile-card .profile-header .rating i {
-    color: #fbbf24;
-    font-size: 16px;
-}
-
-.about .profile-card .profile-header .rating span {
-    margin-left: 8px;
-    font-weight: 600;
-    color: var(--default-color);
-    font-size: 15px;
-}
-
-.about .profile-card .profile-stats {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
-    padding: 30px 0;
-    border-bottom: 1px solid
-        color-mix(in srgb, var(--default-color), transparent 90%);
-}
-
-.about .profile-card .profile-stats .stat-item {
-    text-align: center;
-}
-
-.about .profile-card .profile-stats .stat-item h4 {
-    font-size: 28px;
-    font-weight: 700;
-    color: var(--accent-color);
-    margin-bottom: 6px;
-}
-
-.about .profile-card .profile-stats .stat-item p {
-    font-size: 13px;
-    color: color-mix(in srgb, var(--default-color), transparent 30%);
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    margin: 0;
 }
 
 .about .profile-card .profile-actions {
@@ -293,6 +257,11 @@
     font-size: 16px;
     color: var(--heading-color);
     font-weight: 600;
+}
+.about .content-wrapper .details-grid .detail-item .detail-content a {
+    /* font-size: 16px; */
+    color: var(--heading-color);
+    /* font-weight: 600; */
 }
 
 .about .content-wrapper .skills-showcase .section-tag {
@@ -493,7 +462,7 @@
     width: 44px;
     height: 44px;
     border-radius: 50%;
-    background-color: color-mix(in srgb, #811517, transparent 60%);
+    background-color: color-mix(in srgb, var(--accent-color), transparent 60%);
     border: 1px solid rgba(0, 0, 0, 0.08);
     display: flex;
     align-items: center;

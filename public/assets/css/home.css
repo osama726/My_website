@@ -11,8 +11,16 @@
     overflow: hidden;
     padding-bottom: 80px;
 }
-
+/* 🌙 الوضع الداكن (Default) */
+/* #hero {
+    background-image: url('../../uploads/me2.jpeg');
+    background-size: cover;
+    background-position: center;
+    transition: background-image 0.5s ease;
+    background-repeat: no-repeat;
+} */
 .hero img {
+    /* background-image: url('../../uploads/me2.jpeg'); */
     position: absolute;
     inset: 0;
     display: block;

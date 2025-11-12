@@ -61,5 +61,7 @@ class User extends BaseModel {
         $user = $stmt->fetch();
         return $user ? $user['role'] : null;
     }
+
+    
     
 }

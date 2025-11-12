@@ -99,7 +99,31 @@ header .container-fluid {
 .header .logo img {
     max-height: 55px;
     margin-right: 5px;
+    transition: opacity 0.3s ease;
 }
+
+/* 1. الوضع الداكن (DEFAULT): إظهار dark_logo وإخفاء light_logo */
+.header .logo .logo-dark {
+    display: inline-block;
+    opacity: 1;
+}
+.header .logo .logo-light {
+    display: none; /* إخفاء اللوجو الفاتح في الوضع الداكن */
+    opacity: 0;
+}
+
+
+/* 2. الوضع النهاري (LIGHT MODE): إخفاء dark_logo وإظهار light_logo */
+[data-theme="light"] .header .logo .logo-dark {
+    display: none; /* إخفاء الداكن */
+    opacity: 0;
+}
+
+[data-theme="light"] .header .logo .logo-light {
+    display: inline-block; /* إظهار الفاتح */
+    opacity: 1;
+}
+
 
 .header .btn-log,
 .header .btn-log:focus {
@@ -155,6 +179,75 @@ header .container-fluid {
 .index-page.scrolled .header {
     --background-color: rgba(20, 20, 20, 0.8);
 }
+
+
+/*--------------------------------------------------------------
+# Theme Toggle Button
+--------------------------------------------------------------*/
+.theme-toggle-btn {
+    /* جعل الزر دائرياً */
+    width: 40px;
+    height: 40px;
+    border-radius: 50%; 
+    padding: 0;
+    
+    margin-left: 10px;
+    
+    /* توسيط الأيقونة */
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    
+    /* ألوان الوضع الداكن الافتراضي */
+    color: var(--nav-color); /* لون الأيقونة */
+    background: var(--surface-color);
+    border-color: color-mix(in srgb, var(--default-color), transparent 70%);
+    
+    transition: all 0.3s ease;
+    overflow: hidden; /* لإخفاء الأيقونة غير النشطة */
+}
+
+.theme-toggle-btn:hover {
+    color: var(--accent-color);
+    border-color: var(--accent-color);
+}
+
+/* تنسيق الأيقونات داخل الزر */
+.theme-toggle-btn i {
+    font-size: 1.1rem;
+    position: absolute;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+/* إخفاء الأيقونة غير النشطة افتراضياً (هذا هو Dark Mode) */
+.theme-toggle-btn .theme-icon-sun {
+    opacity: 0; 
+    transform: translateY(10px); /* نرسلها للأسفل */
+}
+.theme-toggle-btn .theme-icon-moon {
+    opacity: 1; 
+    transform: translateY(0);
+}
+
+
+/* 💡 حالة الوضع النهاري (LIGHT MODE STATE) */
+[data-theme="light"] .theme-toggle-btn {
+    /* عكس الألوان الأساسية للزر في الوضع الفاتح */
+    background: var(--surface-color); /* أبيض */
+    color: var(--nav-color); /* نص داكن */
+    border-color: color-mix(in srgb, var(--default-color), transparent 70%);
+}
+
+/* تبديل الأيقونات عند الوضع النهاري */
+[data-theme="light"] .theme-toggle-btn .theme-icon-sun {
+    opacity: 1; /* إظهار أيقونة الشمس */
+    transform: translateY(0);
+}
+[data-theme="light"] .theme-toggle-btn .theme-icon-moon {
+    opacity: 0; /* إخفاء أيقونة القمر */
+    transform: translateY(-10px); /* نرسلها للأعلى */
+}
+
 
 /*--------------------------------------------------------------
 # Navigation Menu
@@ -299,6 +392,7 @@ header .container-fluid {
 
     .header .btn-log {
         background: none;
+        color: var(--nav-dropdown-color);
         font-size: 17px;
         border-radius: 50px;
         transition: 0.3s;
@@ -366,14 +460,39 @@ header .container-fluid {
 .footer .footer-about .logo img {
     max-height: 75px;
     margin-right: 6px;
+    transition: opacity 0.3s ease;
 }
+
+/* 1. الوضع الداكن (DEFAULT): إظهار dark_logo وإخفاء light_logo */
+.footer .logo .logo-dark {
+    display: inline-block;
+    opacity: 1;
+}
+.footer .logo .logo-light {
+    display: none; /* إخفاء اللوجو الفاتح في الوضع الداكن */
+    opacity: 0;
+}
+
+/* 2. الوضع النهاري (LIGHT MODE): إخفاء dark_logo وإظهار light_logo */
+[data-theme="light"] .footer .logo .logo-dark {
+    display: none; /* إخفاء الداكن */
+    opacity: 0;
+}
+
+[data-theme="light"] .footer .logo .logo-light {
+    display: inline-block; /* إظهار الفاتح */
+    opacity: 1;
+}
+
+
 .footer .footer-about .logo img:hover {
     transform: scale(1.05) rotate(3deg);
     transition: 0.3s;
 }
 
 .footer .footer-about p {
-    font-size: 14px;
+    max-width: 300px;
+    font-size: 18px;
     font-family: var(--heading-font);
 }
 

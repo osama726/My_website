@@ -1,27 +1,3 @@
-<!-- <section id="about-section" class="py-5 bg-light">
-    <div class="container">
-        <h2 class="mb-4">من أنا</h2>
-        
-        <div class="row">
-            <div class="col-md-4">
-                <img src="<?= htmlspecialchars($about['image_path'] ?? '') ?>" alt="صورة الملف الشخصي لأسامة" class="img-fluid rounded-circle">
-            </div>
-            
-            <div class="col-md-8">
-                <h3><?= htmlspecialchars($about['headline'] ?? '') ?></h3>
-                <p class="lead"><?= nl2br(htmlspecialchars($about['bio'] ?? '')) ?></p>
-                
-                <?php if (!empty($about['cv_link'])): ?>
-                    <a href="<?= htmlspecialchars($about['cv_link']) ?>" class="btn btn-primary" target="_blank">
-                        <i class="fa-solid fa-download"></i> تحميل السيرة الذاتية (CV)
-                    </a>
-                <?php endif; ?>
-            </div>
-        </div>
-    </div>
-</section> -->
-
-
     <!-- About Section -->
 <section id="about" class="about section">
 
@@ -39,39 +15,18 @@
                 <div class="profile-card">
                     <div class="profile-header">
                         <div class="profile-avatar">
-                            <img src="<?= htmlspecialchars($about['image_path'] ?? '') ?>" class="img-fluid" alt="">
-                            <div class="status-indicator"></div>
+                            <img src="<?= UPLOAD_DIR . htmlspecialchars($about['profile_image']) ??  'default.jpg'?>" class="img-fluid" alt="<?= htmlspecialchars($about['full_name'] ?? 'Profile') ?>">
+                            <div class="status-indicator <?= ($about['is_available_for_work'] ?? 0) ? 'status-available' : 'status-busy' ?>"></div>
                         </div>
-                        <h3>Osama Gamal</h3>
-                        <span class="role">Full Stack Developer</span>
-                        <div class="rating">
-                            <i class="bi bi-star-fill"></i>
-                            <i class="bi bi-star-fill"></i>
-                            <i class="bi bi-star-fill"></i>
-                            <i class="bi bi-star-fill"></i>
-                            <i class="bi bi-star-half"></i>
-                            <span>4.8</span>
-                        </div>
+                        <h3><?= htmlspecialchars($about['full_name'] ?? 'Osama Gamal') ?></h3>
+                        <span class="role">Software Engineer</span>
                     </div>
-
-                <div class="profile-stats">
-                    <div class="stat-item">
-                        <h4>156</h4>
-                        <p>Projects</p>
-                        </div>
-                        <div class="stat-item">
-                        <h4>8+</h4>
-                        <p>Years</p>
-                        </div>
-                        <div class="stat-item">
-                        <h4>42</h4>
-                        <p>Awards</p>
-                    </div>
-                </div>
 
                 <div class="profile-actions">
-                    <a href="<?= htmlspecialchars($about['cv_link']) ?>" class="btn-primary"><i class="bi bi-download"></i> Download My CV</a>
-                    <a href="#" class="btn-secondary"><i class="bi bi-envelope"></i> Contact</a>
+                    <?php if (!empty($about['cv_link'])): ?>
+                            <a href="<?= UPLOAD_DIR . htmlspecialchars($about['cv_link']) ?>" class="btn-primary"><i class="bi bi-download"></i> Download My CV</a>
+                    <?php endif; ?>
+                    <a href="#contact" class="btn-secondary"><i class="bi bi-envelope"></i> Contact</a>
                 </div>
 
                 <div class="social-connect">
@@ -89,7 +44,7 @@
                 <div class="bio-section">
                     <div class="section-tag">About Me</div>
                     <h2>Transforming Ideas into Digital Reality</h2>
-                    <p><?= htmlspecialchars($about['bio'] ?? '') ?></p>
+                    <p><?= nl2br(htmlspecialchars($about['bio_text'] ?? 'Please update your bio from the dashboard.')) ?></p>
                     <p>I also have some skills in front-end development, design, and presentations. I have given numerous presentations and helped organize numerous previous events.</p>
                 </div>
 
@@ -114,7 +69,7 @@
                         <i class="bi bi-envelope"></i>
                         <div class="detail-content">
                             <span>Email</span>
-                            <strong><a class="gmail" href="mailto:oosamaaggamall@gmail.com" style="color: white;">oosamaaggamall@gmail.com</a></strong>
+                            <strong><a class="gmail" href="mailto:oosamaaggamall@gmail.com">oosamaaggamall@gmail.com</a></strong>
                         </div>
                     </div>
 
@@ -122,7 +77,7 @@
                         <i class="bi bi-phone"></i>
                         <div class="detail-content">
                             <span>Phone</span>
-                            <strong><a href="tel:01098154424" style="color: white;">+2 01098154424</a></strong>
+                            <strong><a href="tel:01098154424">+2 01098154424</a></strong>
                         </div>
                     </div>
 
@@ -130,7 +85,13 @@
                         <i class="bi bi-calendar-check"></i>
                         <div class="detail-content">
                             <span>Availability</span>
-                            <strong>Open to Work</strong>
+                            <strong>
+                                <?php if (($about['is_available_for_work'] ?? 0)): ?>
+                                    <span class="text-success">Open to Work</span>
+                                <?php else: ?>
+                                    <span class="text-danger">Currently Busy</span>
+                                <?php endif; ?>
+                            </strong>
                         </div>
                     </div>
 
@@ -138,7 +99,9 @@
                         <i class="bi bi-briefcase"></i>
                         <div class="detail-content">
                             <span>Experience</span>
-                            <strong>1+ Years</strong>
+                            <strong>
+                                <?= htmlspecialchars($about['years_of_experience'] ?? '0') ?>+ Years
+                            </strong>
                         </div>
                     </div>
                 </div>

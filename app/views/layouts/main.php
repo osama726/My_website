@@ -14,9 +14,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <meta content="Osama Gamal Portfolio Website" name="description">
     <title>Osama Gamal</title>
-    <link rel="icon" type="image/png" href="<?= UPLOAD_DIR ?>Logo_osama2.png">
+    <meta content="Portfolio and projects of Osama Gamal, PHP and Laravel developer." name="description">
+    <link rel="icon" type="image/png" href="<?= UPLOAD_DIR ?>dark_logo.png">
+    <link rel="apple-touch-icon" href="<?= UPLOAD_DIR ?>dark_logo.png"> 
+    <link rel="apple-touch-icon" href="<?= UPLOAD_DIR ?>dark_logo.png" sizes="192x192">
     <!-- Vendor CSS Files -->
     <link href="<?= BASE_URL ?>assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link href="<?= BASE_URL ?>assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
