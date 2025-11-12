@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="public/uploads/logo-dark.png" alt="Portfolio Logo" width="150"/>
+  <img src="public/assets/screenshots/dark_logo.png" alt="Portfolio Logo" width="150"/>
 </p>
 
 <h1 align="center">PHP MVC Portfolio CMS</h1>
@@ -81,6 +81,6 @@ icons for "Add to Home Screen" functionality.
 ## 📷 Screenshots
 > *(Remember to upload your project screenshots to your repository and link them here.)*
 
-![Dashboard Overview](public/uploads/home_page.png)
-![Settings Management](public/uploads/dashboard.png)
-![Contact Form Validation](public/uploads/about.png)
+![Home page](public/assets/screenshots/home_page.png)
+![Dashboard Overview](public/assets/screenshots/dashboard.png)
+![About page](public/assets/screenshots/about.png)
