@@ -299,6 +299,53 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
+/* Lenis Smooth Scrolling JS File */
+function initLenis() {
+    // 1. إنشاء مثيل Lenis جديد
+    const lenis = new Lenis({
+        duration: 1.2,        // سرعة التمرير (افتراضياً 1.2)
+        easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // دالة التباطؤ
+        direction: 'vertical',
+        gestureDirection: 'vertical',
+        smoothTouch: false,   // نُفضل False للتحكم الأفضل على الأجهزة اللوحية
+        touchMultiplier: 2,   // حساسية التمرير على اللمس
+    });
+
+    // 2. دالة تشغيل التمرير عبر طلب الإطار (RAF Loop)
+    function raf(time) {
+        lenis.raf(time);
+        requestAnimationFrame(raf);
+    }
+    
+    // البدء بالدورة
+    requestAnimationFrame(raf);
+
+    // 💡 نقطة حاسمة: ربط Lenis بأزرار الـAnchor Links
+    // بما أن Lenis يتحكم في التمرير الآن، يجب استخدام Lenis للتنقل بين الأقسام (#contact)
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const targetId = this.getAttribute('href');
+            if (targetId === '#') return;
+            
+            // استخدام دالة scrollTo الخاصة بـLenis
+            lenis.scrollTo(targetId, { 
+                offset: -50, // تعويض لارتفاع الـHeader الثابت
+                duration: 1.5 // تمرير أبطأ قليلاً للروابط الداخلية
+            }); 
+        });
+    });
+
+    // 💡 إذا كنت تستخدم مكتبة AOS (Animation on Scroll)، تحتاج لربطها بـLenis:
+    lenis.on('scroll', (e) => {
+        // يمكنك هنا تحديث حالة الـAOS إذا كنت تستخدمه (AOS.refresh() أو منطق مماثل)
+        // إذا كنت تستخدم AOS، ابحث عن طريقة ربطه بـLenis أو جربه بدون ربط أولاً.
+    });
+}
+
+// 3. تشغيل الدالة عند تحميل DOM بالكامل
+document.addEventListener('DOMContentLoaded', initLenis);
+
 
 /* Validation Contact Form JS File */
 /* global $, alert, console */

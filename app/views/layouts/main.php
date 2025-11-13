@@ -1,7 +1,5 @@
 <!-- app/views/layouts/main.php -->
 <?php
-    // require_once __DIR__ . '/../../config/config.php';
-
     // بداية الصفحة نبدأ الجلسة لو ما كانتش بدأت
     if (session_status() == PHP_SESSION_NONE) {
         session_start();
@@ -55,13 +53,10 @@
     </main>
 
     <?php include 'footer.php'; ?>
-
+    
 
     <!-- Scroll Top -->
     <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
-
-    <!-- Preloader -->
-    <!-- <div id="preloader"></div> -->
 
     <!-- Vendor JS Files -->
     <script src="<?= BASE_URL ?>assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -73,6 +68,9 @@
     <script src="<?= BASE_URL ?>assets/vendor/imagesloaded/imagesloaded.pkgd.min.js"></script>
     <script src="<?= BASE_URL ?>assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
     <script src="<?= BASE_URL ?>assets/vendor/swiper/swiper-bundle.min.js"></script>
+
+    <!--  lenis.js for smooth scrolling -->
+    <script src="<?= BASE_URL ?>assets/vendor/lenis/lenis.min.js"></script>
 
     <!-- jQuery JS File -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> 

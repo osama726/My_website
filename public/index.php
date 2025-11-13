@@ -2,7 +2,7 @@
     // public/index.php
     require_once __DIR__ . '/../app/config/config.php';
 
-    //  تضمين ملف autoload الذي أنشأه Composer
+    //  تضمين ملف autoload لـ Composer
     require __DIR__ . '/../vendor/autoload.php';
 
 
@@ -13,17 +13,14 @@
 
         http_response_code($code);
 
-        // 💡 المتغيرات الضرورية لصفحة الخطأ
+        // إعداد بيانات الخطأ لتمريرها إلى الـ layout
         $errorData = [
             'code' => $code,
-            'title' => $title, // سيتم استخدامه في <title> و <h2>
+            'title' => $title,
             'message' => $message ?? 'An unexpected error occurred.',
             
-            // 💡 إضافة المتغير الضروري الذي يتوقعه layouts/main.php
+            //  إضافة المتغير الضروري الذي يتوقعه layouts/main.php
             'viewPath' => __DIR__ . '/../app/views/errors/error.php',
-            
-            // 💡 يمكن إضافة متغيرات أخرى يحتاجها الـLayout
-            // 'pageScripts' => null, 
         ];
 
         // نمرر البيانات إلى الـ layout

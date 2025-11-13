@@ -78,6 +78,7 @@
     line-height: 1.6;
     position: relative;
     z-index: 1;
+    overflow-wrap: break-word;
 }
 
 .error-404 .error-box .error-actions {
