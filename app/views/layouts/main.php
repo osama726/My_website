@@ -15,10 +15,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>Osama Gamal</title>
-    <meta content="Portfolio and projects of Osama Gamal, PHP and Laravel developer." name="description">
-    <link rel="icon" type="image/png" href="<?= UPLOAD_DIR ?>dark_logo.png">
+    <!-- Favicons -->
+    <link rel="icon" type="image/png" href="<?= UPLOAD_DIR ?>dark_logo.png" sizes="32x32">
     <link rel="apple-touch-icon" href="<?= UPLOAD_DIR ?>dark_logo.png"> 
     <link rel="apple-touch-icon" href="<?= UPLOAD_DIR ?>dark_logo.png" sizes="192x192">
+
+    <!-- SEO Meta Tags -->
+    <meta property="og:title" content="Osama's Portfolio: Custom PHP MVC Backend Showcase">
+    <meta property="og:description" content="Explore a robust, self-managed portfolio website built from scratch using Vanilla PHP and MVC.">
+    <meta property="og:url" content="https://osamaa.page.gd/">
+    <meta property="og:image" content="<?= UPLOAD_DIR ?>home_page.png">
+    <meta name="robots" content="index, follow">
+    <meta name="description" content="A self-managed, single-page portfolio application and Content Management System (CMS) built from scratch using Vanilla PHP and the Model-View-Controller (MVC) architecture. This project demonstrates proficiency in developing clean, secure, and highly maintainable back-end solutions. The system allows the administrator full control over all dynamic content, including projects, skills, and personal profile information, ensuring data integrity and a modern user experience.">
+    <meta name="keywords" content="PHP, MVC, Backend Developer, Portfolio, MySQL, [Osama Gamal, Web Development, Content Management System, CMS, Software Engineer, Freelancer]">
+    <meta name="author" content="Osama Gamal">
+
+
     <!-- Vendor CSS Files -->
     <link href="<?= BASE_URL ?>assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link href="<?= BASE_URL ?>assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">

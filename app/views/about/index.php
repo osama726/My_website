@@ -24,7 +24,9 @@
 
                 <div class="profile-actions">
                     <?php if (!empty($about['cv_link'])): ?>
-                            <a href="<?= UPLOAD_DIR . htmlspecialchars($about['cv_link']) ?>" class="btn-primary"><i class="bi bi-download"></i> Download My CV</a>
+                            <a href="<?= UPLOAD_DIR . htmlspecialchars($about['cv_link']) ?>" class="btn-primary" target="_blank" download="<?= UPLOAD_DIR . htmlspecialchars($about['cv_link']) ?>">
+                                <i class="bi bi-download"></i> Download My CV
+                            </a>
                     <?php endif; ?>
                     <a href="#contact" class="btn-secondary"><i class="bi bi-envelope"></i> Contact</a>
                 </div>
