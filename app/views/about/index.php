@@ -15,7 +15,7 @@
                 <div class="profile-card">
                     <div class="profile-header">
                         <div class="profile-avatar">
-                            <img src="<?= UPLOAD_DIR . htmlspecialchars($about['profile_image']) ??  'default.jpg'?>" class="img-fluid" alt="<?= htmlspecialchars($about['full_name'] ?? 'Profile') ?>">
+                            <img src="<?= UPLOAD_DIR . htmlspecialchars($about['profile_image']) ??  'default.jpg'?>" class="img-fluid" alt="<?= htmlspecialchars($about['full_name'] ?? 'Profile') ?>" loading="lazy">
                             <div class="status-indicator <?= ($about['is_available_for_work'] ?? 0) ? 'status-available' : 'status-busy' ?>"></div>
                         </div>
                         <h3><?= htmlspecialchars($about['full_name'] ?? 'Osama Gamal') ?></h3>

@@ -26,8 +26,7 @@ class HomeController extends Controller {
         $aboutData = $settingsModel->getGeneralSettings();
 
         $this->view('home/index', [
-            'title' => 'Welcome to My Portfolio',
-            'message' => 'This is the home page',
+            'title' => 'Home page',
             'projects' => $projects,
             'skills' => $skills,
             'about' => $aboutData,

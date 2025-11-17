@@ -12,7 +12,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Osama Gamal</title>
+    <title><?= $title ?? 'Osama Gamal' ?></title>
     <!-- Favicons -->
     <link rel="icon" type="image/png" href="<?= UPLOAD_DIR ?>dark_logo.png" sizes="32x32">
     <link rel="apple-touch-icon" href="<?= UPLOAD_DIR ?>dark_logo.png"> 
@@ -40,7 +40,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"/>
 
     <!-- main CSS File -->
-    <link rel="stylesheet" href="<?= BASE_URL ?>assets/css/main.css">
+    <link rel="stylesheet" href="<?= BASE_URL ?>assets/css/main.min.css">
 </head>
 <body>
     <?php include 'header.php'; ?>
@@ -76,7 +76,7 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> 
 
     <!-- Main JS File -->
-    <script src="<?= BASE_URL ?>assets/js/main.js"></script>
+    <script src="<?= BASE_URL ?>assets/js/main.min.js"></script>
 
     <!-- إمكانية تحميل سكربتات خاصة بالصفحة -->
     <?php if (!empty($pageScripts) && is_array($pageScripts)): ?>

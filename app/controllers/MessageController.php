@@ -146,10 +146,6 @@ class MessageController extends Controller {
                 ]);
                 exit;
             }
-            
-            // مسح بيانات الفورم المخزنة مسبقاً بعد النجاح
-            // unset($_SESSION['form_data']);
-            // unset($_SESSION['form_errors']);
 
         } else {
             // ❌ توجد أخطاء: نخزن المدخلات والأخطاء في الـ Session
@@ -159,19 +155,6 @@ class MessageController extends Controller {
             'errors' => $formErrors // نرسل الأخطاء المفصلة
             ]);
             exit;
-            // $_SESSION['form_errors'] = $formErrors;
-            // $_SESSION['form_data'] = [
-            //     'name' => $_POST['name'] ?? '',
-            //     'email' => $_POST['email'] ?? '',
-            //     'subject' => $_POST['subject'] ?? '',
-            //     'phone' => $_POST['phone'] ?? '',
-            //     'message' => $_POST['message'] ?? '',
-            // ];
-            
         }
-        
-        // إعادة التوجيه إلى صفحة الاتصال
-        // header("Location: " . BASE_URL . "#contact");
-        // exit;
     }
 }

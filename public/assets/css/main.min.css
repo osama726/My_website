@@ -1,0 +1,14 @@
+/* Import style files */ 
+@import url('variables.min.css');
+@import url('layout.min.css');
+@import url('errors.min.css');
+@import url('home.min.css');
+@import url('about.min.css');
+@import url('skills.min.css');
+@import url('project.min.css');
+@import url('contact.min.css');
+@import url('Register.min.css');
+@import url('Dashboard.min.css');
+@import url('register.min.css');
+
+/* Main CSS file for the application */

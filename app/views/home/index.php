@@ -2,13 +2,11 @@
 <section id="hero" class="hero section dark-background">
 
 		<img src="<?= UPLOAD_DIR ?>me2.jpeg" alt="" data-aos="fade-in">
-		<!-- <img src="<?= UPLOAD_DIR ?>title.png" alt="" data-aos="fade-in"> -->
-		<!-- <div class="img"></div> -->
-		
+
 		<div class="container" data-aos="fade-up" data-aos-delay="100">
 			<div class="row justify-content-center">
 				<div class="col-lg-8 text-center">
-					<h2><?= $title ?? 'Welcome to My Portfolio' ?></h2>
+					<h2>Welcome to My Portfolio</h2>
 					<p>I'm a <span class="typed" data-typed-items="Software Engineer, Back_End, Developer, Freelancer, Programmer"></span><span class="typed-cursor" aria-hidden="true"></span></p>
 					<div class="social-links">
 						<a href="https://github.com/osama726" target="_blank"><i class="bi bi-github"></i></a>
