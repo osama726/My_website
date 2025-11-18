@@ -15,19 +15,41 @@
         <?php else: ?>
 
             <?php 
-                // نعرض فقط أول 6 مشاريع لو مش في صفحة العرض الكامل
+                // show only first 6 projects if not showing all
                 $displayProjects = $showAll ? $projects : array_slice($projects, 0, 6);
             ?>
 
             <div class="projects-grid">
                 <?php foreach ($displayProjects as $p): ?>
+                    <?php 
+                        $status = $p['status'] ?? 'In Progress';
+                        $statusClass = match($status) {
+                            'Completed' => 'bg-success',
+                            'In Progress' => 'bg-info',
+                            'On Hold' => 'bg-warning',
+                            'Archived' => 'bg-secondary',
+                            default => 'bg-info',
+                        };
+                        $statusicon = match($status) {
+                            'Completed' => 'bi bi-check-circle-fill',
+                            'In Progress' => 'bi bi-hourglass-split',
+                            'On Hold' => 'bi bi-stop-circle',
+                            'Archived' => 'bi bi-folder2-open',
+                            default => 'bi bi-check-circle-fill',
+                        };
+                    ?>
                     <div class="project-card" data-aos="zoom-in">
                         <div class="project-thumb">
-                              <?php if (!empty($p['image'])): ?>
-                                  <img src="<?= UPLOAD_DIR . htmlspecialchars($p['image']) ?>" alt="<?= htmlspecialchars($p['title']) ?>">
-                              <?php else: ?>
-                                  <div class="no-image"><i class="bi bi-card-image"></i></div>
-                              <?php endif; ?>
+                            <?php if (!empty($p['image'])): ?>
+                                <img src="<?= UPLOAD_DIR . htmlspecialchars($p['image']) ?>" alt="<?= htmlspecialchars($p['title']) ?>">
+                            <?php else: ?>
+                                <div class="no-image"><i class="bi bi-card-image"></i></div>
+                            <?php endif; ?>
+
+                            <span class="project-status-badge badge <?= $statusClass ?>">
+                                <!-- <i class="bi bi-check-circle-fill me-1"></i> <?= htmlspecialchars($status) ?> -->
+                                <i class="<?= $statusicon ?> me-1"></i> <?= htmlspecialchars($status) ?>
+                            </span>
 
                             <div class="project-overlay">
                                 <h4><?= htmlspecialchars($p['title'] ?? 'Untitled Project') ?></h4>

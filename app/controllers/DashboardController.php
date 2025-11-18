@@ -54,6 +54,7 @@ class DashboardController extends Controller {
             $description = trim($_POST['description']);
             $link = trim($_POST['link']);
             $github_link = trim($_POST['github_link']);
+            $status = trim($_POST['status'] ?? 'In Progress');
             $image = null;
 
             // ✅ رفع الصورة لو موجودة
@@ -77,10 +78,10 @@ class DashboardController extends Controller {
             // تعديل أو إضافة حسب الحالة
             if (!empty($_POST['project_id'])) {
                 $id = $_POST['project_id'];
-                $projectModel->updateProject($id, $title, $description, $image, $link, $github_link);
+                $projectModel->updateProject($id, $title, $description, $image, $link, $github_link, $status);
                 $_SESSION['flash'] = "✅ Project updated successfully.";
             } else {
-                $projectModel->addProject($title, $description, $image, $link, $github_link);
+                $projectModel->addProject($title, $description, $image, $link, $github_link, $status);
                 $_SESSION['flash'] = "✅ Project added successfully.";
             }
 

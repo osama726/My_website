@@ -8,22 +8,22 @@ class Project extends BaseModel {
     }
 
     // create new project
-    public function addProject($title, $description, $image = null, $link = null, $github_link = null) {
-        $stmt = $this->db->prepare("INSERT INTO projects (title, description, image, link, github_link) VALUES (?, ?, ?, ?, ?)");
-        return $stmt->execute([$title, $description, $image, $link, $github_link]);
+    public function addProject($title, $description, $image = null, $link = null, $github_link = null,  $status = null) {
+        $stmt = $this->db->prepare("INSERT INTO projects (title, description, image, link, github_link, status) VALUES (?, ?, ?, ?, ?, ?)");
+        return $stmt->execute([$title, $description, $image, $link, $github_link, $status]);
     }
 
-    public function updateProject($id, $title, $description, $image = null, $link = null, $github_link = null) {
+    public function updateProject($id, $title, $description, $image = null, $link = null, $github_link = null, $status = null) {
         if ($image) {
             $stmt = $this->db->prepare("UPDATE projects
-                SET title = ?, description = ?, image = ?, link = ?, github_link = ?
+                SET title = ?, description = ?, image = ?, link = ?, github_link = ?, status = ?
                 WHERE id = ?");
-            return $stmt->execute([$title, $description, $image, $link, $github_link, $id]);
+            return $stmt->execute([$title, $description, $image, $link, $github_link, $status , $id]);
         } else {
             $stmt = $this->db->prepare("UPDATE projects
-                SET title = ?, description = ?, link = ?, github_link = ?
+                SET title = ?, description = ?, link = ?, github_link = ?, status = ?
                 WHERE id = ?");
-            return $stmt->execute([$title, $description, $link, $github_link, $id]);
+            return $stmt->execute([$title, $description, $link, $github_link, $status , $id]);
         }
     }
 

@@ -171,3 +171,40 @@
         text-align: center;
     }
 }
+
+
+/*--------------------------------------------------------------
+# Project Status Badge Styling
+--------------------------------------------------------------*/
+
+.projects .project-thumb {
+    position: relative;
+    overflow: hidden;
+}
+
+.projects .project-status-badge {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    padding: 6px 10px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    border-radius: 8px; /* حواف دائرية أنيقة */
+    z-index: 10;
+    /* color: white; */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3); /* ظل خفيف للبروز */
+}
+
+
+.projects .project-status-badge.bg-success {
+    background-color: #28a745 !important;
+}
+.projects .project-status-badge.bg-info {
+    background-color: var(--accent-color) !important;
+}
+.projects .project-status-badge.bg-warning {
+    background-color: #bc8d00 !important;
+}
+.projects .project-status-badge.bg-secondary {
+    background-color: #6c757d !important;
+}

@@ -32,6 +32,7 @@
                                         <th>Description</th>
                                         <th>Image</th>
                                         <th>Links</th>
+                                        <th>Status</th>
                                         <th>Actions</th>
                                     </tr>
                                 </thead>
@@ -55,6 +56,17 @@
                                                 <?php if (!empty($p['github_link'])): ?>
                                                     <a href="<?= htmlspecialchars($p['github_link']) ?>" target="_blank" class="link-icon" title="GitHub Repo"><i class="bi bi-github"></i></a>
                                                 <?php endif; ?>
+                                            </td>
+                                            <td>
+                                                <?php 
+                                                    $badgeClass = match($p['status'] ?? 'In Progress') {
+                                                        'Completed' => 'bg-success',
+                                                        'On Hold' => 'bg-warning',
+                                                        'Archived' => 'bg-secondary',
+                                                        default => 'bg-info',
+                                                    };
+                                                ?>
+                                                <span class="badge <?= $badgeClass ?>"><?= htmlspecialchars($p['status'] ?? 'In Progress') ?></span>
                                             </td>
                                             <td>
                                                 <div class="action-buttons-group"> 
@@ -116,6 +128,19 @@
                             <label for="github_link" class="form-label">GitHub Link</label>
                             <input type="url" name="github_link" id="github_link" class="form-control"
                                 value="<?= $isEdit ? htmlspecialchars($currentProject['github_link']) : '' ?>">
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="status" class="form-label">Project Status</label>
+                            <select name="status" id="status" class="form-control" required>
+                                <?php 
+                                    $currentStatus = $isEdit ? ($currentProject['status'] ?? 'In Progress') : 'In Progress';
+                                ?>
+                                <option value="In Progress" <?= $currentStatus === 'In Progress' ? 'selected' : '' ?> style="color: black;">In Progress</option>
+                                <option value="Completed" <?= $currentStatus === 'Completed' ? 'selected' : '' ?> style="color: black;">Completed</option>
+                                <option value="On Hold" <?= $currentStatus === 'On Hold' ? 'selected' : '' ?> style="color: black;">On Hold</option>
+                                <option value="Archived" <?= $currentStatus === 'Archived' ? 'selected' : '' ?> style="color: black;">Archived</option>
+                            </select>
                         </div>
 
                         <div class="mb-3">
