@@ -1,6 +1,6 @@
 # Ignore sensitive files
 .env
-app/config/config.php
+
 
 # Ignore uploads and cache
 public/uploads/
